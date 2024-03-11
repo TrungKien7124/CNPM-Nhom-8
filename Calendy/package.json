@@ -1,0 +1,21 @@
+{
+  "name": "calendy",
+  "version": "1.0.0",
+  "description": "coming soon..",
+  "main": "./src/app.js",
+  "scripts": {
+    "start": "nodemon --inspect src/index.js",
+    "watch": "node-sass --watch src/resources/scss/style.scss src/public/css/style.css",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3",
+    "express-handlebars": "^7.1.2",
+    "node-sass": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

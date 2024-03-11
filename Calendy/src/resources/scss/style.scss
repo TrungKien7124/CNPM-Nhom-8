@@ -1,0 +1,435 @@
+:root {
+    --my-cyan: #55D3D2;
+    --gradient-cyan: linear-gradient(to right, #64F2F4, #92BFFA);
+    --my-whitesmoke: #F6F7FA;
+    --border-white: #E6E9EF;
+    --gray-text-color: #878895;
+}
+
+.box {
+    height: 100px;
+    width: 100%;
+    background-color: var(--primary-clr);
+}
+
+body {
+    background-color: var(--my-whitesmoke);
+}
+
+.container .left,
+.container .right {
+    border-radius: 20px;
+    background-color: white;
+}
+
+.calendar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    color: var(--gray-text-color);
+    border-radius: 5px;
+    background-color: white;
+}
+
+.calendar .month {
+    width: 100%;
+    height: 50px;
+    display: flex;  
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 50px;
+    font-size: 2rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    position: relative;
+}
+
+.calendar .month .prev,
+.calendar .month .next,
+.calendar .month .date {
+    cursor: pointer;
+}
+
+.calendar .month .prev:hover,
+.calendar .month .next:hover,
+.calendar .month .date:hover {
+    color: var(--my-cyan);
+}
+
+.calendar .month .goToDate {
+    position: absolute;
+    top: auto;
+    bottom: auto;
+    font-size: 1rem;
+    width: 50px;
+    display: flex;
+    flex-direction: row;
+    visibility: hidden;
+}
+
+.goToDate .inputDate {
+    width: 150px;
+    font-weight: 500;
+    border: 3px solid var(--border-white);
+}   
+
+.goToDate .goToButton {
+    background-image: var(--gradient-cyan);
+    color: white;
+    border: 3px solid var(--border-white);
+    border-left: 0;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    opacity: 0.8;
+}
+.goToDate .goToButton:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.calendar .weekdays {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    border: 3px solid var(--border-white);
+    border-bottom-width: 0px;
+}
+
+.weekdays div {
+    width: 14.285%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.weekdays .weekend {
+    color: red;
+}
+
+.calendar .days {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    border: 3px solid var(--border-white);
+    border-top-width: 0px;
+}
+
+.calendar .days .day {
+    width: 14.285%;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--my-cyan);
+}
+
+.calendar .days .day:not(.prev-month, .next-month, .active):hover {
+    font-size: 2.5rem;
+}
+
+.calendar .days .prev-month,
+.calendar .days .next-month {
+    color: var(--gray-text-color);
+}
+
+.calendar .days .active {
+    position: relative;
+    font-size: 2rem;
+    color: white;
+    background-image: var(--gradient-cyan);
+    border-radius: 10px;
+}
+
+.calendar .days .today {
+    font-size: 2.5rem;
+}
+
+
+
+// CSS Right Div
+
+
+
+.container .right {
+    position: relative;
+    background-image: white;
+    min-height: 100vh;
+    border-radius: 0%;
+    border-left: 3px solid var(--border-white);
+    border-right: 3px solid var(--border-white);
+}
+
+.right .today-date {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    text-transform: capitalize;
+}
+
+.right .today-date .event-day {
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--my-cyan);
+}
+
+.right .today-date .event-date {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--gray-text-color);
+}
+
+.events {
+    width: 100%;
+    height: 100%;
+    max-height: 600px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding-left: 4px;
+}
+
+.events .event {
+    position: relative;
+    width: 95%;
+    min-height: 70px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0 20px;
+    padding-left: 50px;
+    color: var(--gray-text-color);
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.events .event:nth-child(even) {
+    background: transparent;
+}
+
+.events .event:hover {
+    color: white;
+    background: linear-gradient(to right, var(--my-cyan), transparent);
+}
+
+.events .event:hover i,
+.events .event:hover .event-time{
+    color: white;
+}
+
+.events .event .title {
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.events .event .title .event-title {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-left: 20px;
+}
+
+.events .event i {
+    color: var(--my-cyan);
+    font-size: 0.5rem;
+}
+
+.events .event .event-time {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--gray-text-color);
+    margin-left: 15px;
+    pointer-events: none;
+}
+
+.events .event::after {
+    content: "☑️";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.5;
+    transform: translateY(-50%);
+}
+
+.events .event:hover::after {
+    display: flex;
+}
+
+.add-event {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: var(--my-cyan);
+    border: 5px solid var(--my-cyan);
+    opacity: 0.5;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.add-event:hover {
+    opacity: 1;
+}
+
+.add-event i {
+    pointer-events: none;
+}
+
+.events .no-event {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--gray-text-color);
+}
+
+.add-event-wrapper {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    width: 90%;
+    max-height: 0;
+    overflow: hidden;
+    border-radius: 5px;
+    border: 3px solid var(--border-white);
+    background-color: var(--my-whitesmoke);
+    transform: translateX(-50%);
+    transition: max-height 0.5s ease;
+}
+
+.add-event-wrapper.active {
+    max-height: 300px;
+}
+
+.add-event-header {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    color: #373c4f;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.add-event-header .close {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.add-event-header .close:hover {
+    color: var(--primary-clr);
+}
+
+.add-event-header .title {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.add-event-body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px;
+}
+
+.add-event-body .add-event-input {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.add-event-body .add-event-input input {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #f5f5f5;
+    padding: 0 10px;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #373c4f;
+}
+
+.add-event-body .add-event-input input::placeholder {
+    color: #a5a5a5;
+}
+
+.add-event-body .add-event-input input:focus {
+    border-bottom: 1px solid var(--primary-clr);
+}
+
+.add-event-body .add-event-input input:focus::placeholder {
+    color: var(--primary-clr);
+}
+
+.add-event-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.add-event-footer .add-event-btn {
+    height: 40px;
+    font-size: 1rem;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    color: #fff;
+    background-image: var(--gradient-cyan);
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid var(--primary-clr);
+    opacity: 0.8;
+}
+
+.add-event-footer .add-event-btn:hover {
+    background-color: transparent;
+    opacity: 1;
+}
