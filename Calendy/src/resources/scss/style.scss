@@ -1,5 +1,5 @@
 :root {
-    --my-cyan: #55D3D2;
+    --my-cyan: #51C4F0;
     --gradient-cyan: linear-gradient(to right, #64F2F4, #92BFFA);
     --my-whitesmoke: #F6F7FA;
     --border-white: #E6E9EF;
@@ -13,12 +13,13 @@
 }
 
 body {
-    background-color: var(--my-whitesmoke);
+    background-color: #E8E8EB;
 }
 
-.container .left,
-.container .right {
-    border-radius: 20px;
+.container .left {
+    margin-top: 20px;
+    border-radius: 40px;
+    padding: 0 20px;
     background-color: white;
 }
 
@@ -32,7 +33,7 @@ body {
     justify-content: space-between;
     color: var(--gray-text-color);
     border-radius: 5px;
-    background-color: white;
+    background-color: transparent;
 }
 
 .calendar .month {
@@ -94,7 +95,7 @@ body {
 
 .calendar .weekdays {
     width: 100%;
-    height: 60px;
+    height: 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -102,8 +103,6 @@ body {
     font-size: 1rem;
     font-weight: 500;
     text-transform: capitalize;
-    border: 3px solid var(--border-white);
-    border-bottom-width: 0px;
 }
 
 .weekdays div {
@@ -123,12 +122,12 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 5px 5px;
     font-size: 1.5rem;
     font-weight: 500;
     margin-bottom: 20px;
-    border: 3px solid var(--border-white);
-    border-top-width: 0px;
+    border: 2px solid var(--border-white);
+    border-radius: 20px;
 }
 
 .calendar .days .day {
@@ -155,7 +154,7 @@ body {
     font-size: 2rem;
     color: white;
     background-image: var(--gradient-cyan);
-    border-radius: 10px;
+    border-radius: 15px;
 }
 
 .calendar .days .today {
@@ -169,12 +168,11 @@ body {
 
 
 .container .right {
+    margin-top: 20px;
     position: relative;
     background-image: white;
     min-height: 100vh;
-    border-radius: 0%;
     border-left: 3px solid var(--border-white);
-    border-right: 3px solid var(--border-white);
 }
 
 .right .today-date {
@@ -192,7 +190,7 @@ body {
 .right .today-date .event-day {
     font-size: 2rem;
     font-weight: 500;
-    color: var(--my-cyan);
+    color: black;
 }
 
 .right .today-date .event-date {
@@ -212,19 +210,27 @@ body {
     padding-left: 4px;
 }
 
+.vertical-line-icon {
+    width: 5px;
+    height: 50px;
+    background-color: var(--my-cyan);
+    border-radius: 50px;
+}
+
 .events .event {
     position: relative;
     width: 95%;
     min-height: 70px;
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    align-items: center;
+    justify-content: left   ;
+    flex-direction: row;
     gap: 5px;
     padding: 0 20px;
-    padding-left: 50px;
     color: var(--gray-text-color);
-    border-radius: 50px;
+    border-radius: 20px;
     cursor: pointer;
+    background-color: white;
 }
 
 .events .event:nth-child(even) {
@@ -233,16 +239,20 @@ body {
 
 .events .event:hover {
     color: white;
-    background: linear-gradient(to right, var(--my-cyan), transparent);
+    background: linear-gradient(to left, #64F2F4, #92BFFA);
 }
 
-.events .event:hover i,
-.events .event:hover .event-time{
+.events .event:hover .event-time {
     color: white;
+}
+
+.events .event:hover .vertical-line-icon {
+    background-color: white;
 }
 
 .events .event .title {
     display: flex;
+    flex-direction: column;
     align-items: center;
     pointer-events: none;
 }
@@ -250,7 +260,7 @@ body {
 .events .event .title .event-title {
     font-size: 1rem;
     font-weight: 400;
-    margin-left: 20px;
+    padding-left: 20px;
 }
 
 .events .event i {
@@ -262,7 +272,6 @@ body {
     font-size: 0.8rem;
     font-weight: 400;
     color: var(--gray-text-color);
-    margin-left: 15px;
     pointer-events: none;
 }
 
@@ -271,7 +280,7 @@ body {
     position: absolute;
     top: 50%;
     right: 0;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 300;
     line-height: 1;
     display: none;
@@ -289,22 +298,25 @@ body {
     position: absolute;
     bottom: 30px;
     right: 30px;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
+    font-size: 1.5rem;
     color: var(--my-cyan);
     border: 5px solid var(--my-cyan);
-    opacity: 0.5;
     border-radius: 50%;
     background-color: transparent;
     cursor: pointer;
 }
 
 .add-event:hover {
-    opacity: 1;
+    width: 60px;
+    height: 60px;
+    font-size: 1.8rem;
+    bottom: 25px;
+    right: 25px;
 }
 
 .add-event i {
@@ -329,9 +341,8 @@ body {
     width: 90%;
     max-height: 0;
     overflow: hidden;
-    border-radius: 5px;
-    border: 3px solid var(--border-white);
-    background-color: var(--my-whitesmoke);
+    border-radius: 20px;    
+    background-color: white;
     transform: translateX(-50%);
     transition: max-height 0.5s ease;
 }
@@ -357,7 +368,7 @@ body {
 }
 
 .add-event-header .close:hover {
-    color: var(--primary-clr);
+    color: red;
 }
 
 .add-event-header .title {
@@ -388,7 +399,7 @@ body {
     height: 100%;
     outline: none;
     border: none;
-    border-bottom: 1px solid #f5f5f5;
+    border-bottom: 1px solid black;
     padding: 0 10px;
     font-size: 1rem;
     font-weight: 400;
@@ -400,11 +411,11 @@ body {
 }
 
 .add-event-body .add-event-input input:focus {
-    border-bottom: 1px solid var(--primary-clr);
+    border-bottom: 1px solid var(--my-cyan);
 }
 
 .add-event-body .add-event-input input:focus::placeholder {
-    color: var(--primary-clr);
+    color: var(--my-cyan);
 }
 
 .add-event-footer {
@@ -420,16 +431,17 @@ body {
     font-weight: 500;
     outline: none;
     border: none;
-    color: #fff;
-    background-image: var(--gradient-cyan);
-    border-radius: 5px;
+    color: var(--my-cyan);
+    background-color: transparent;
+    border-radius: 20px;
     cursor: pointer;
-    padding: 5px 10px;
-    border: 1px solid var(--primary-clr);
-    opacity: 0.8;
+    padding: 0 10px;
+    border: 3px solid var(--my-cyan);
+    text-align: right;
 }
 
 .add-event-footer .add-event-btn:hover {
-    background-color: transparent;
-    opacity: 1;
+    background-image: var(--gradient-cyan);
+    color: white;
+    border: 0;
 }
