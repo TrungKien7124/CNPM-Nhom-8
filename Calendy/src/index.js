@@ -5,6 +5,10 @@ const port = 3000
 
 const route = require('./routes/index.route.js')
 
+const db = require('./config/database/index.js');
+
+db.connect();
+
 app.use(express.static('./src/public'));
 
 // View Engine

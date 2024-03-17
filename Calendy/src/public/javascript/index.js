@@ -9,7 +9,9 @@ const calendar = document.querySelector('.calendar'),
     eventDay = document.querySelector('.event-day'),
     eventDate = document.querySelector('.event-date'),
     addEvent = document.querySelector('.add-event'),
-    addEventWrapper = document.querySelector('.add-event-wrapper');
+    addEventWrapper = document.querySelector('.add-event-wrapper'),
+    eventWrapperOverlay = document.querySelector('.overlay'),
+    closeAddEventForm = document.querySelector('.add-event-wrapper .close');
 
 let today = new Date();
 let month = today.getMonth();
@@ -140,5 +142,11 @@ function getEventDate() {
 }
 
 addEvent.addEventListener("click", () => {
-    addEventWrapper.classList.toggle('active');
+    addEventWrapper.classList.add('active');
+    eventWrapperOverlay.style.visibility = 'visible';
+})
+
+closeAddEventForm.addEventListener("click", () => {
+    addEventWrapper.classList.remove('active');
+    eventWrapperOverlay.style.visibility = 'hidden';
 })
