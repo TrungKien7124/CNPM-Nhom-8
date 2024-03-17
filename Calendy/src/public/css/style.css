@@ -10,11 +10,30 @@ body {
   background-color: #E8E8EB; }
 
 .left {
+  margin-top: 20px; }
+
+.event-button {
+  border-radius: 25px;
+  border: 3px solid white;
+  background-color: white;
+  padding: 2px 10px;
+  min-width: 100px;
+  min-height: 48px;
+  align-items: center; }
+
+.icon-add-event {
+  padding: 0 5px; }
+
+.text-add-event {
+  padding: 0 5px;
+  font-weight: 500; }
+
+.calendar-main {
   margin-top: 20px;
   border-radius: 40px;
   padding: 0 20px;
   background-color: white; }
-  .left .calendar {
+  .calendar-main .calendar {
     position: relative;
     width: 100%;
     height: 100%;
@@ -25,26 +44,28 @@ body {
     color: var(--gray-text-color);
     border-radius: 5px;
     background-color: transparent; }
-    .left .calendar .month {
+    .calendar-main .calendar .month {
       width: 100%;
-      height: 50px;
+      height: 32px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 20px 50px;
-      font-size: 2rem;
+      padding-top: 20px;
+      font-size: 14px;
       font-weight: 500;
       text-transform: capitalize;
-      position: relative; }
-      .left .calendar .month .prev,
-      .left .calendar .month .next,
-      .left .calendar .month .date {
-        cursor: pointer; }
-        .left .calendar .month .prev:hover,
-        .left .calendar .month .next:hover,
-        .left .calendar .month .date:hover {
+      position: relative;
+      margin-bottom: 10px; }
+      .calendar-main .calendar .month .prev,
+      .calendar-main .calendar .month .next,
+      .calendar-main .calendar .month .date {
+        cursor: pointer;
+        white-space: nowrap; }
+        .calendar-main .calendar .month .prev:hover,
+        .calendar-main .calendar .month .next:hover,
+        .calendar-main .calendar .month .date:hover {
           color: var(--my-cyan); }
-      .left .calendar .month .goToDate {
+      .calendar-main .calendar .month .goToDate {
         position: absolute;
         top: auto;
         bottom: auto;
@@ -53,11 +74,11 @@ body {
         display: flex;
         flex-direction: row;
         visibility: hidden; }
-        .left .calendar .month .goToDate .inputDate {
+        .calendar-main .calendar .month .goToDate .inputDate {
           width: 150px;
           font-weight: 500;
           border: 3px solid var(--border-white); }
-        .left .calendar .month .goToDate .goToButton {
+        .calendar-main .calendar .month .goToDate .goToButton {
           background-image: var(--gradient-cyan);
           color: white;
           border: 3px solid var(--border-white);
@@ -66,59 +87,54 @@ body {
           display: flex;
           align-items: center;
           opacity: 0.8; }
-          .left .calendar .month .goToDate .goToButton:hover {
+          .calendar-main .calendar .month .goToDate .goToButton:hover {
             opacity: 1;
             cursor: pointer; }
-    .left .calendar .weekdays {
+    .calendar-main .calendar .weekdays {
       width: 100%;
       height: 30px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
-      font-size: 1rem;
+      font-size: 12px;
       font-weight: 500;
       text-transform: capitalize; }
-      .left .calendar .weekdays div {
+      .calendar-main .calendar .weekdays div {
         width: 14.285%;
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: center; }
-      .left .calendar .weekdays .weekend {
+      .calendar-main .calendar .weekdays .weekend {
         color: red; }
-    .left .calendar .days {
+    .calendar-main .calendar .days {
       width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      padding: 5px 5px;
-      font-size: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      /* Tạo 7 cột với chiều rộng bằng nhau */
+      gap: 5px;
+      font-size: 12px;
       font-weight: 500;
-      margin-bottom: 20px;
-      border: 2px solid var(--border-white);
-      border-radius: 20px; }
-      .left .calendar .days .day {
-        width: 14.285%;
-        height: 120px;
+      margin-bottom: 20px; }
+      .calendar-main .calendar .days .day {
+        width: 24px;
+        height: 24px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         color: var(--my-cyan); }
-        .left .calendar .days .day:not(.prev-month):not(.active):not(.next-month):hover {
-          font-size: 2.5rem; }
-      .left .calendar .days .active {
+        .calendar-main .calendar .days .day:not(.prev-month):not(.active):not(.next-month):hover {
+          background-color: #f1f3f4;
+          border-radius: 50%; }
+      .calendar-main .calendar .days .active {
         position: relative;
-        font-size: 2rem;
         color: white;
         background-image: var(--gradient-cyan);
         border-radius: 15px; }
-      .left .calendar .days .prev-month,
-      .left .calendar .days .next-month {
+      .calendar-main .calendar .days .prev-month,
+      .calendar-main .calendar .days .next-month {
         color: var(--gray-text-color); }
-      .left .calendar .days .today {
-        font-size: 2.5rem; }
 
 .right {
   margin-top: 20px;
