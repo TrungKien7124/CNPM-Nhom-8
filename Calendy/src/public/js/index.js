@@ -1,8 +1,10 @@
+import CalendarFunc from './calendar.js';
+
 const calendar = document.querySelector('.calendar'),
     date = document.querySelector('.calendar .date'),
     prevButton = document.querySelector('.calendar .prev'),
     nextButton = document.querySelector('.calendar .next'),
-    daysContainer = document.querySelector('.calendar .days'),
+    left__day_container = document.querySelector('.calendar .days'),
     goToDateForm = document.querySelector('.calendar .goToDate'),
     inputDate = document.querySelector('.calendar .goToDate .inputDate'),
     goToDateButton = document.querySelector('.calendar .goToDate .goToButton'),
@@ -11,11 +13,13 @@ const calendar = document.querySelector('.calendar'),
     addEvent = document.querySelector('.add-event'),
     addEventWrapper = document.querySelector('.add-event-wrapper'),
     eventWrapperOverlay = document.querySelector('.overlay'),
-    closeAddEventForm = document.querySelector('.add-event-wrapper .close');
+    closeAddEventForm = document.querySelector('.add-event-wrapper .close'),
+    right__day_container = document.querySelector('.right .days');
 
-let today = new Date();
-let month = today.getMonth();
-let year = today.getFullYear();
+let tmpDate = new Date();
+let today = tmpDate.getDate();
+let month = tmpDate.getMonth();
+let year = tmpDate.getFullYear();
 
 let weekdays = [
     "Monday",
@@ -42,40 +46,14 @@ let months = [
     "December",
 ]
 
-function init() {
-    let firstDay = new Date(year, month, 1);
-    let lastDay = new Date(year, month + 1, 0);
-    let prevMonthLastDay = new Date(year, month, 0);
-    
+function init(today, month, year) {
     // show date
-    date.innerHTML = months[month] + ' ' + year; 
+    date.innerHTML = CalendarFunc.getMonthDate(month, year);
 
-    let days = "";
-    
-    //show last month days
-    var tmp = prevMonthLastDay.getDay();
-    if (tmp == 0) tmp = 7;
-    for (var i = 1, tmpDate = prevMonthLastDay.getDate(); i <= tmp; i++) {
-        days += `<div class="day prev-month">${tmpDate - tmp + i}</div>`;
-    }
+    left__day_container.innerHTML = CalendarFunc.getMonthDays(today, month, year);
+    right__day_container.innerHTML = CalendarFunc.getWeekDays(today, month, year);
 
-    //show current month days
-    for (var i = 1, n = lastDay.getDate(), currDay = today.getDate(); i <= n; i++) {
-        if (i == currDay) {
-            days += `<div class="day today active">${i}</div>`;
-        } else {
-            days += `<div class="day ">${i}</div>`;
-        }
-    }
-
-    //show next month days
-    for (var i = lastDay.getDay() + 1, tmpDate = 1; i <= 7 && i != 1; i++) {
-        days += `<div class="day next-month">${tmpDate++}</div>`;
-    }
-
-    daysContainer.innerHTML = days;
     addDaysListener();
-    getEventDate();
 }
 
 prevButton.addEventListener("click", () => {
@@ -84,7 +62,7 @@ prevButton.addEventListener("click", () => {
       month = 11;
       year--;
     }
-    init();
+    init(today, month, year);
 });
 
 nextButton.addEventListener("click", () => {
@@ -93,7 +71,7 @@ nextButton.addEventListener("click", () => {
       month = 0;
       year++;
     }
-    init();
+    init(today, month, year);
 
 });
 
@@ -110,7 +88,7 @@ goToDateButton.addEventListener("click", () => {
         tmp = newDate.split("/");
         month = parseInt(tmp[0]) - 1;
         year = parseInt(tmp[1]);
-        init();
+        init(today, month, year);
     
     } else {
         alert("Invalid Date!\nInput format: mm/yyyy !");
@@ -119,26 +97,18 @@ goToDateButton.addEventListener("click", () => {
     goToDateForm.style.visibility = 'hidden';
 });
 
-init();
+init(today, month, year);
 
 function addDaysListener() {
-    document.querySelectorAll('.day:not(.prev-month, .next-month)').forEach(
+    document.querySelectorAll('.left .day:not(.prev-month, .next-month)').forEach(
         (e) => {
             e.addEventListener("click", () => {
                 document.querySelector('.day.active').classList.remove('active');
                 e.classList.add('active');
-                getEventDate();
+                init(e.innerHTML, month, year);
             })
         }
     );
-}
-
-function getEventDate() {
-    var tmp = document.querySelector('.day.active');
-    var curr = new Date(year, month, tmp.innerHTML);
-    currDay = curr.getDay();
-    eventDay.innerHTML = weekdays[(currDay == 0 ? 6 : --currDay)];
-    eventDate.innerHTML = curr.getDate() + '/' + (curr.getMonth() + 1) + '/' + curr.getFullYear();
 }
 
 addEvent.addEventListener("click", () => {
