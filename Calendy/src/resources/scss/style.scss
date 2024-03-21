@@ -1,16 +1,14 @@
-:root {
-    --my-cyan: #51C4F0;
-    --gradient-cyan: linear-gradient(to right, #64F2F4, #92BFFA);
-    --my-whitesmoke: #F6F7FA;
-    --border-white: #E6E9EF;
-    --gray-text-color: #878895;
-}
+$bodyBackground: linear-gradient(to bottom right, #EAE7F1 , #E1F3FE );
+$containerBackground: #fff;
+$textBackground: #CFF8FE;
+$textColor1: #000;
+$textColor2: #22CCEE;
+$textColor3: #878895;
+$boderColor: #EFEFEF;
 
 body {
-    background-color: #E8E8EB;
+    background-image: $bodyBackground;
 }
-
-
 
 .left {
     margin-top: 20px;
@@ -42,7 +40,7 @@ body {
         max-height: 0px;
         overflow: hidden;
         border-radius: 20px;
-        background-color: white;
+        background-color: $containerBackground;
         top: 0;
         left: 0;
         z-index: 2;
@@ -55,8 +53,8 @@ body {
             align-items: center;
             justify-content: space-between;
             padding: 0 20px;
-            color: #373c4f;
-            border-bottom: 1px solid #f5f5f5;
+            color: $textColor2;
+            border-bottom: 1px solid $boderColor;
 
             .title {
                 font-size: 1.2rem;
@@ -108,7 +106,7 @@ body {
                         border-bottom: 1px solid var(--my-cyan);
 
                         &::placeholder {
-                            color: var(--my-cyan);
+                            color: $textColor2;
                         }
                     }
                 }
@@ -119,7 +117,7 @@ body {
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: white;
+            background-color: $containerBackground;
             padding-bottom: 10px;
 
             .add-event-btn {
@@ -128,17 +126,16 @@ body {
                 font-weight: 500;
                 outline: none;
                 border: none;
-                color: var(--my-cyan);
+                color: $textColor2;
                 background-color: transparent;
                 border-radius: 20px;
                 cursor: pointer;
                 padding: 0 10px;
-                border: 3px solid var(--my-cyan);
+                border: 3px solid $textColor2;
                 text-align: right;
 
                 &:hover {
-                    background-image: var(--gradient-cyan);
-                    color: white;
+                    background-color: $textBackground;
                     border: 0;
                 }
             }
@@ -164,7 +161,7 @@ body {
         margin-top: 20px;
         border-radius: 40px;
         padding: 0 20px;
-        background-color: white;
+        background-color: $containerBackground;
 
         .calendar {
             position: relative;
@@ -174,7 +171,7 @@ body {
             flex-direction: column;
             flex-wrap: wrap;
             justify-content: space-between;
-            color: var(--gray-text-color);
+            color: $textColor1;
             border-radius: 5px;
             background-color: transparent;
 
@@ -198,7 +195,7 @@ body {
                     white-space: nowrap;
 
                     &:hover {
-                        color: var(--my-cyan);
+                        color: $textColor2;
                     }
                 }
 
@@ -215,13 +212,13 @@ body {
                     .inputDate {
                         width: 150px;
                         font-weight: 500;
-                        border: 3px solid var(--border-white);
+                        border: 3px solid $boderColor;
                     }
 
                     .goToButton {
-                        background-image: var(--gradient-cyan);
-                        color: white;
-                        border: 3px solid var(--border-white);
+                        background-color: $textBackground;
+                        color: $textColor2;
+                        border: 3px solid $boderColor;
                         border-left: 0;
                         font-size: 0.8rem;
                         display: flex;
@@ -261,22 +258,21 @@ body {
 
             .days {
                 width: 100%;
-                display: grid;
-                grid-template-columns: repeat(7, 1fr);
-                /* Tạo 7 cột với chiều rộng bằng nhau */
-                gap: 5px;
-                font-size: 12px;
+                font-size: 100%;
                 font-weight: 500;
                 margin-bottom: 20px;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
 
                 .day {
-                    width: 24px;
-                    height: 24px;
+                    width: 14.285%;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     cursor: pointer;
-                    color: var(--my-cyan);
+                    color: $textColor2;
+                    margin-bottom: 5px;
 
                     &:not(.prev-month):not(.active):not(.next-month):hover {
                         background-color: #f1f3f4;
@@ -286,14 +282,14 @@ body {
 
                 .active {
                     position: relative;
-                    color: white;
-                    background-image: var(--gradient-cyan);
+                    color: $textColor2;
+                    background-color: $textBackground;
                     border-radius: 15px;
                 }
 
                 .prev-month,
                 .next-month {
-                    color: var(--gray-text-color);
+                    color: $textColor3;
                 }
             }
         }
@@ -344,15 +340,15 @@ body {
                 align-items: center;
                 justify-content: center;
                 font-size: 2rem;
-                color: var(--my-cyan);
+                color: $textColor2;
                 margin: auto;
             }
 
             .active { 
-                background-image: var(--gradient-cyan);
-                color: white;
+                background-color: $textBackground;
+                color: $textColor2;
                 font-size: 2.5rem;
-                border-bottom: 3px solid var(--border-white);   
+                border-bottom: 3px solid $boderColor;   
                 border-radius: 5px;
             }
         }
@@ -370,8 +366,8 @@ body {
                 justify-content: center;
                 font-size: 2rem;
                 color: var(--my-cyan);
-                border-left: 3px solid var(--border-white);
-                border-top: 3px solid var(--border-white);
+                border-left: 3px solid $boderColor;
+                border-top: 3px solid $boderColor;
                 
                 &:first-child {
                     border-left: 0;
