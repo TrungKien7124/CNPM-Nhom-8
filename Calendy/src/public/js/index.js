@@ -8,13 +8,15 @@ const calendar = document.querySelector('.calendar'),
     goToDateForm = document.querySelector('.calendar .goToDate'),
     inputDate = document.querySelector('.calendar .goToDate .inputDate'),
     goToDateButton = document.querySelector('.calendar .goToDate .goToButton'),
-    eventDay = document.querySelector('.event-day'),
-    eventDate = document.querySelector('.event-date'),
     addEvent = document.querySelector('.add-event'),
-    addEventWrapper = document.querySelector('.add-event-wrapper'),
+    addEventForm = document.querySelector('.add-event-wrapper'),
     eventWrapperOverlay = document.querySelector('.overlay'),
     closeAddEventForm = document.querySelector('.add-event-wrapper .close'),
+    addEventFrom__addEventButton = document.querySelector('.add-event-wrapper .add-event-footer .add-event-btn'),
     right__day_container = document.querySelector('.right .days');
+
+const get_event_API = "http://localhost:3000/api/get-events";
+const add_event_API = "http://localhost:3000/api/add-event";
 
 let tmpDate = new Date();
 let today = tmpDate.getDate();
@@ -112,11 +114,43 @@ function addDaysListener() {
 }
 
 addEvent.addEventListener("click", () => {
-    addEventWrapper.classList.add('active');
+    addEventForm.classList.add('active');
     eventWrapperOverlay.style.visibility = 'visible';
 })
 
 closeAddEventForm.addEventListener("click", () => {
-    addEventWrapper.classList.remove('active');
+    addEventForm.classList.remove('active');
     eventWrapperOverlay.style.visibility = 'hidden';
 })
+
+function addEventToDatabase(title, start_date, end_date) {
+    fetch(add_event_API, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            title: title,
+            start_date: start_date,
+            end_date: end_date
+        })
+    })
+    .then(response => response.json())
+    .then(() => {
+        init(today, month, year);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+addEventFrom__addEventButton.addEventListener("click", () => {
+    addEventForm.classList.remove('active');
+    eventWrapperOverlay.style.visibility = 'hidden';
+    var title = document.querySelector('input[name="title"]').value;
+    var start_date = document.querySelector('input[name="start_date"]').value;
+    var end_date = document.querySelector('input[name="end_date"]').value;
+
+    addEventToDatabase(title, start_date, end_date);
+    alert(title + start_date + end_date);
+});
