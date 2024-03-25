@@ -12,8 +12,8 @@ let APIController = {
     },
 
     addEvent(req, res) {
-        // let {name, start, end} = req.body;
-        let sql = `INSERT INTO events (title, start_date, end_date) VALUES ('hello', 'from', 'api')`;
+        let {title, start_date, end_date} = req.body;
+        let sql = `INSERT INTO events (title, start_date, end_date) VALUES ('${title}', '${start_date}', '${end_date}')`;
         databaseQuery(sql)
             .then(() => {
                 return res.status(200).json({message: 'Add event successfully!'});
