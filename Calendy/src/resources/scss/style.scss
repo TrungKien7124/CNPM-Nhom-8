@@ -340,12 +340,11 @@ body {
                 align-items: center;
                 justify-content: center;
                 font-size: 2rem;
-                color: $textColor2;
+                color: $textColor1;
                 margin: auto;
             }
 
             .active { 
-                background-color: $textBackground;
                 color: $textColor2;
                 font-size: 2.5rem;
                 border-bottom: 3px solid $boderColor;   

@@ -248,10 +248,9 @@ body {
         align-items: center;
         justify-content: center;
         font-size: 2rem;
-        color: #22CCEE;
+        color: #000;
         margin: auto; }
       .right .week-calendar .days .active {
-        background-color: #CFF8FE;
         color: #22CCEE;
         font-size: 2.5rem;
         border-bottom: 3px solid #EFEFEF;
