@@ -1,4 +1,5 @@
 import CalendarFunc from './calendar.js';
+import eventFunc from './event.js';
 
 const monthCalendar = document.querySelector('.left .calendar'),
     monthCalendar__date = document.querySelector('.calendar .date'),
@@ -13,7 +14,8 @@ const monthCalendar = document.querySelector('.left .calendar'),
     left__overlay = document.querySelector('.overlay'),
     monthCalendar__addEventForm_closeButton = document.querySelector('.add-event-wrapper .close'),
     monthCalendar__addEventFrom_addButton = document.querySelector('.add-event-wrapper .add-event-footer .add-event-btn'),
-    weekCalendar__days_container = document.querySelector('.right .days');
+    weekCalendar__days_container = document.querySelector('.right .days'),
+    weekCalendar__weekEvents_container = document.querySelector('.right .events_container');
 
 const get_event_API = "http://localhost:3000/api/get-events";
 const add_event_API = "http://localhost:3000/api/add-event";
@@ -54,6 +56,8 @@ function init(today, month, year) {
 
     monthCalendar__days_container.innerHTML = CalendarFunc.getMonthDays(today, month, year);
     weekCalendar__days_container.innerHTML = CalendarFunc.getWeekDays(today, month, year);
+    weekCalendar__weekEvents_container.innerHTML = eventFunc.setEventsID(month, year);
+    eventFunc.getEventsList(document.querySelectorAll('.right .events'));
 
     addDaysListener();
 }
@@ -61,8 +65,8 @@ function init(today, month, year) {
 monthCalendar__goToPrevMonth_button.addEventListener("click", () => {
     month--;
     if (month < 0) {
-      month = 11;
-      year--;
+        month = 11;
+        year--;
     }
     init(today, month, year);
 });
@@ -70,15 +74,15 @@ monthCalendar__goToPrevMonth_button.addEventListener("click", () => {
 monthCalendar__goToNextMonth_button.addEventListener("click", () => {
     month++;
     if (month > 11) {
-      month = 0;
-      year++;
+        month = 0;
+        year++;
     }
     init(today, month, year);
 
 });
 
 monthCalendar__date.addEventListener("click", () => {
-    monthCalendar__date.style.visibility = 'hidden'; 
+    monthCalendar__date.style.visibility = 'hidden';
     monthCalendar__goToDate_form.style.visibility = 'visible';
 });
 
@@ -91,11 +95,11 @@ monthCalendar__goToDate_button.addEventListener("click", () => {
         month = parseInt(tmp[0]) - 1;
         year = parseInt(tmp[1]);
         init(today, month, year);
-    
+
     } else {
         alert("Invalid Date!\nInput format: mm/yyyy !");
     }
-    monthCalendar__date.style.visibility = 'visible'; 
+    monthCalendar__date.style.visibility = 'visible';
     monthCalendar__goToDate_form.style.visibility = 'hidden';
 });
 
@@ -107,7 +111,7 @@ function addDaysListener() {
             e.addEventListener("click", () => {
                 document.querySelector('.day.active').classList.remove('active');
                 e.classList.add('active');
-                init(e.innerHTML, month, year);
+                init(e.innerText, month, year);
             })
         }
     );
@@ -135,13 +139,13 @@ function addEventToDatabase(title, start_date, end_date) {
             end_date: end_date
         })
     })
-    .then(response => response.json())
-    .then(() => {
-        init(today, month, year);
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
+        .then(response => response.json())
+        .then(() => {
+            init(today, month, year);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }
 
 monthCalendar__addEventFrom_addButton.addEventListener("click", () => {
