@@ -1,19 +1,19 @@
 import CalendarFunc from './calendar.js';
 
-const calendar = document.querySelector('.calendar'),
-    date = document.querySelector('.calendar .date'),
-    prevButton = document.querySelector('.calendar .prev'),
-    nextButton = document.querySelector('.calendar .next'),
-    left__day_container = document.querySelector('.calendar .days'),
-    goToDateForm = document.querySelector('.calendar .goToDate'),
-    inputDate = document.querySelector('.calendar .goToDate .inputDate'),
-    goToDateButton = document.querySelector('.calendar .goToDate .goToButton'),
-    addEvent = document.querySelector('.add-event'),
-    addEventForm = document.querySelector('.add-event-wrapper'),
-    eventWrapperOverlay = document.querySelector('.overlay'),
-    closeAddEventForm = document.querySelector('.add-event-wrapper .close'),
-    addEventFrom__addEventButton = document.querySelector('.add-event-wrapper .add-event-footer .add-event-btn'),
-    right__day_container = document.querySelector('.right .days');
+const monthCalendar = document.querySelector('.left .calendar'),
+    monthCalendar__date = document.querySelector('.calendar .date'),
+    monthCalendar__goToPrevMonth_button = document.querySelector('.calendar .prev'),
+    monthCalendar__goToNextMonth_button = document.querySelector('.calendar .next'),
+    monthCalendar__days_container = document.querySelector('.calendar .days'),
+    monthCalendar__goToDate_form = document.querySelector('.calendar .goToDate'),
+    monthCalendar__goToDate_input = document.querySelector('.calendar .goToDate .monthCalendar__goToDate_input'),
+    monthCalendar__goToDate_button = document.querySelector('.calendar .goToDate .goToButton'),
+    monthCalendar__addEvent_button = document.querySelector('.add-event'),
+    monthCalendar__addEventForm = document.querySelector('.add-event-wrapper'),
+    left__overlay = document.querySelector('.overlay'),
+    monthCalendar__addEventForm_closeButton = document.querySelector('.add-event-wrapper .close'),
+    monthCalendar__addEventFrom_addButton = document.querySelector('.add-event-wrapper .add-event-footer .add-event-btn'),
+    weekCalendar__days_container = document.querySelector('.right .days');
 
 const get_event_API = "http://localhost:3000/api/get-events";
 const add_event_API = "http://localhost:3000/api/add-event";
@@ -50,15 +50,15 @@ let months = [
 
 function init(today, month, year) {
     // show date
-    date.innerHTML = CalendarFunc.getMonthDate(month, year);
+    monthCalendar__date.innerHTML = CalendarFunc.getMonthDate(month, year);
 
-    left__day_container.innerHTML = CalendarFunc.getMonthDays(today, month, year);
-    right__day_container.innerHTML = CalendarFunc.getWeekDays(today, month, year);
+    monthCalendar__days_container.innerHTML = CalendarFunc.getMonthDays(today, month, year);
+    weekCalendar__days_container.innerHTML = CalendarFunc.getWeekDays(today, month, year);
 
     addDaysListener();
 }
 
-prevButton.addEventListener("click", () => {
+monthCalendar__goToPrevMonth_button.addEventListener("click", () => {
     month--;
     if (month < 0) {
       month = 11;
@@ -67,7 +67,7 @@ prevButton.addEventListener("click", () => {
     init(today, month, year);
 });
 
-nextButton.addEventListener("click", () => {
+monthCalendar__goToNextMonth_button.addEventListener("click", () => {
     month++;
     if (month > 11) {
       month = 0;
@@ -77,14 +77,14 @@ nextButton.addEventListener("click", () => {
 
 });
 
-date.addEventListener("click", () => {
-    date.style.visibility = 'hidden'; 
-    goToDateForm.style.visibility = 'visible';
+monthCalendar__date.addEventListener("click", () => {
+    monthCalendar__date.style.visibility = 'hidden'; 
+    monthCalendar__goToDate_form.style.visibility = 'visible';
 });
 
-goToDateButton.addEventListener("click", () => {
+monthCalendar__goToDate_button.addEventListener("click", () => {
 
-    var newDate = inputDate.value;
+    var newDate = monthCalendar__goToDate_input.value;
     var dateRegex = /^(0[1-9]|1[0-2])\/\d{4}$/;
     if (dateRegex.test(newDate)) {
         tmp = newDate.split("/");
@@ -95,8 +95,8 @@ goToDateButton.addEventListener("click", () => {
     } else {
         alert("Invalid Date!\nInput format: mm/yyyy !");
     }
-    date.style.visibility = 'visible'; 
-    goToDateForm.style.visibility = 'hidden';
+    monthCalendar__date.style.visibility = 'visible'; 
+    monthCalendar__goToDate_form.style.visibility = 'hidden';
 });
 
 init(today, month, year);
@@ -113,14 +113,14 @@ function addDaysListener() {
     );
 }
 
-addEvent.addEventListener("click", () => {
-    addEventForm.classList.add('active');
-    eventWrapperOverlay.style.visibility = 'visible';
+monthCalendar__addEvent_button.addEventListener("click", () => {
+    monthCalendar__addEventForm.classList.add('active');
+    left__overlay.style.visibility = 'visible';
 })
 
-closeAddEventForm.addEventListener("click", () => {
-    addEventForm.classList.remove('active');
-    eventWrapperOverlay.style.visibility = 'hidden';
+monthCalendar__addEventForm_closeButton.addEventListener("click", () => {
+    monthCalendar__addEventForm.classList.remove('active');
+    left__overlay.style.visibility = 'hidden';
 })
 
 function addEventToDatabase(title, start_date, end_date) {
@@ -144,9 +144,9 @@ function addEventToDatabase(title, start_date, end_date) {
     });
 }
 
-addEventFrom__addEventButton.addEventListener("click", () => {
-    addEventForm.classList.remove('active');
-    eventWrapperOverlay.style.visibility = 'hidden';
+monthCalendar__addEventFrom_addButton.addEventListener("click", () => {
+    monthCalendar__addEventForm.classList.remove('active');
+    left__overlay.style.visibility = 'hidden';
     var title = document.querySelector('input[name="title"]').value;
     var start_date = document.querySelector('input[name="start_date"]').value;
     var end_date = document.querySelector('input[name="end_date"]').value;
