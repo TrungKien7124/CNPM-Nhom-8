@@ -1,5 +1,113 @@
+@charset "UTF-8";
 body {
   background-image: linear-gradient(to bottom right, #EAE7F1, #E1F3FE); }
+
+.header {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  height: 64px; }
+
+.first-part {
+  display: flex; }
+
+.menu-header {
+  border: none;
+  width: 48px;
+  /* Đảm bảo kích thước phù hợp với hình ảnh */
+  height: 48px;
+  /* Đảm bảo kích thước phù hợp với hình ảnh */
+  border-radius: 50%;
+  /* Biến nó thành hình tròn */
+  display: flex;
+  justify-content: center;
+  /* Căn giữa theo chiều ngang */
+  align-items: center;
+  /* Căn giữa theo chiều dọc */
+  transition: background-color 0.3s;
+  /* Hiệu ứng chuyển đổi màu nền */
+  background-color: #fff; }
+
+.menu-header:hover {
+  background-color: #f0f0f0;
+  /* Màu nền khi hover */ }
+
+.menu-header-img {
+  max-width: 20px; }
+
+.beside-menu {
+  display: flex; }
+
+.logo-calendy {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.beside-logo {
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.detail-items {
+  display: flex; }
+
+.current-state {
+  margin-left: 30px;
+  padding: 8px;
+  border: 1px solid;
+  border-radius: 5px;
+  border-color: #dadce0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer; }
+
+.current-state:hover {
+  background-color: #f0f0f0; }
+
+.change-state {
+  color: #5f6368; }
+
+.prev-state {
+  color: #5f6368;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border-radius: 50%;
+  position: relative;
+  transition: background-color 0.3s;
+  /* Hiệu ứng chuyển đổi màu nền */ }
+
+.prev-state:hover {
+  background-color: #f0f0f0; }
+
+.prev-state::before {
+  content: "";
+  /* Cần content để pseudo-element hoạt động */
+  width: 10px;
+  /* Độ rộng của dấu mũi tên */
+  height: 10px;
+  /* Chiều cao của dấu mũi tên */
+  border-top: 2px solid #5f6368;
+  /* Đường viền trắng cho dấu mũi tên */
+  border-left: 2px solid #5f6368;
+  /* Đường viền trắng cho dấu mũi tên */
+  position: absolute;
+  /* Thiết lập phần tử là absolute */
+  top: 50%;
+  /* Đẩy lên phía trên 50% */
+  left: 55%;
+  /* Di chuyển sang trái 55% */
+  transform: translate(-50%, -50%) rotate(-45deg);
+  /* Di chuyển ngược lại 50% và xoay 135 độ */ }
 
 .left {
   margin-top: 20px;
