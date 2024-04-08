@@ -1,24 +1,22 @@
-const express = require('express')
-const exphbs = require('express-handlebars');
-const app = express()
-const port = 3000
+const express = require('express');
+const app = express();
+const configViewEngine = require('./config/viewEngine.js');
+const webRoute = require('./routes/web.js');
+const APIRoute = require('./routes/api.js');
+const {db, databaseQuery} = require('./config/database.js');
+const configReqBody = require('./config/reqBody.js');
+const port = 3000;
 
-const route = require('./routes/index.route.js')
+// Cau hinh req.body de lay du lieu tu api
+configReqBody(app);
 
-const db = require('./config/database/index.js');
+// Cau hinh handlebars va static files
+configViewEngine(app);
 
-db.connect();
-
-app.use(express.static('./src/public'));
-
-// View Engine
-app.engine('hbs', exphbs.engine({ extname: '.hbs' }));
-app.set('view engine', 'hbs');
-app.set('views', './src/resources/views');
-
-// Routes init
-route(app);
+// Khoi tao routes
+app.use('/', webRoute);
+app.use('/api', APIRoute);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+    console.log(`Example app listening on port ${port}`);
 })
