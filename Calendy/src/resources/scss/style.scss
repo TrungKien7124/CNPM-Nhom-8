@@ -10,9 +10,109 @@ body {
     background-image: $bodyBackground;
 }
 
-// .container-fluid {
-//     max-width: 1200px;
-// }
+.header {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    height: 64px; }
+  
+  .first-part {
+    display: flex; }
+  
+  .menu-header {
+    border: none;
+    width: 48px;
+    /* Đảm bảo kích thước phù hợp với hình ảnh */
+    height: 48px;
+    /* Đảm bảo kích thước phù hợp với hình ảnh */
+    border-radius: 50%;
+    /* Biến nó thành hình tròn */
+    display: flex;
+    justify-content: center;
+    /* Căn giữa theo chiều ngang */
+    align-items: center;
+    /* Căn giữa theo chiều dọc */
+    transition: background-color 0.3s;
+    /* Hiệu ứng chuyển đổi màu nền */
+    background-color: #fff; }
+  
+  .menu-header:hover {
+    background-color: #f0f0f0;
+    /* Màu nền khi hover */ }
+  
+  .menu-header-img {
+    max-width: 20px; }
+  
+  .beside-menu {
+    display: flex; }
+  
+  .logo-calendy {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+  
+  .beside-logo {
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+  
+  .detail-items {
+    display: flex; }
+  
+  .current-state {
+    margin-left: 30px;
+    padding: 8px;
+    border: 1px solid;
+    border-radius: 5px;
+    border-color: #dadce0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer; }
+  
+  .current-state:hover {
+    background-color: #f0f0f0; }
+  
+  .change-state {
+    color: #5f6368; }
+  
+  .prev-state {
+    color: #5f6368;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    border-radius: 50%;
+    position: relative;
+    transition: background-color 0.3s; }
+  
+  .prev-state:hover {
+    background-color: #f0f0f0; }
+  
+ //::before là một pseudo-element được sử dụng để thêm nội dung vào
+ // trước phần tử mục tiêu mà không cần phải thay đổi cấu trúc HTML
+ // Nó cho phép bạn chèn nội dung hoặc kiểu dáng bổ sung mà không cần thay đổi HTML gốc.
+ // Khi bạn sử dụng ::before, bạn có thể đặt các quy tắc kiểu dáng cho pseudo-element này
+ // giống như đối với một phần tử HTML thực sự. Điều này có thể bao gồm việc thiết lập
+ // kích thước, màu sắc, nội dung và các thuộc tính khác.
+  .prev-state::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid #5f6368;
+    border-left: 2px solid #5f6368;
+    position: absolute;
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%) rotate(-45deg); 
+    }
 
 .left {
     margin-top: 20px;
