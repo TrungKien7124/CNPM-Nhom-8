@@ -27,7 +27,7 @@ function getMonthDays(day, month, year) {
     //show last month days
     var tmp = prevMonthLastDay.getDay();
     if (tmp == 0) tmp = 7;
-    for (var i = 1, tmpDate = prevMonthLastDay.getDate(); i <= tmp; i++) {
+    for (var i = 1, tmpDate = prevMonthLastDay.getDate(); i <= tmp && tmp != 7; i++) {
         days += `<div class="day prev-month"><div>${tmpDate - tmp + i}</div></div>`;
     }
 

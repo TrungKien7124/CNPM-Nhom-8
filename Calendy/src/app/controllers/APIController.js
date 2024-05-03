@@ -1,8 +1,11 @@
 const { db, databaseQuery } = require('../../config/database.js');
+const Event = require('../models/event.js');
+
+let eventManagement = new Event();
 
 let APIController = {
     getEvents(req, res) {
-        databaseQuery('SELECT * FROM events')
+        eventManagement.getEvents()
             .then((events) => {
                 return res.status(200).json(events);
             })
@@ -12,9 +15,8 @@ let APIController = {
     },
 
     addEvent(req, res) {
-        let {title, start_date, end_date} = req.body;
-        let sql = `INSERT INTO events (title, start_date, end_date) VALUES ('${title}', '${start_date}', '${end_date}')`;
-        databaseQuery(sql)
+        eventManagement.getUserValue(req.body);
+        eventManagement.addEvent()
             .then(() => {
                 return res.status(200).json({message: 'Add event successfully!'});
             })
