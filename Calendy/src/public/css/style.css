@@ -271,6 +271,9 @@ body {
         .left .add-event-wrapper .add-event-footer .add-event-btn:hover {
           background-color: #CFF8FE;
           border: 0; }
+  .left .edit-event-wrapper {
+    position: absolute;
+    visibility: hidden; }
   .left .overlay {
     position: fixed;
     top: 0;
@@ -459,6 +462,8 @@ body {
           width: 100%;
           display: flex;
           justify-content: center;
-          align-items: center; }
+          align-items: center;
+          cursor: pointer;
+          margin-bottom: 5px; }
         .right .week-calendar .events_container .events:first-child {
           border-left: 0; }

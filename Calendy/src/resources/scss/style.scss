@@ -114,7 +114,6 @@ body {
     transform: translate(-50%, -50%) rotate(-45deg); 
     }
 
-
 .left {
     margin-top: 20px;
     position: relative;
@@ -245,6 +244,11 @@ body {
                 }
             }
         }
+    }
+
+    .edit-event-wrapper {
+        position: absolute;
+        visibility: hidden;
     }
 
     .overlay {
@@ -495,6 +499,8 @@ body {
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    cursor: pointer;
+                    margin-bottom: 5px;
                 }
 
                 &:first-child {

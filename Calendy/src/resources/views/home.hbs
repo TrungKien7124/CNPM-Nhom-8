@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-3">
+        <div class="col-2">
             <div class="left">
 
 
@@ -43,13 +43,34 @@
                     </div>
                     
                 </div>
+                <div class="edit-event-wrapper">
+                    <div class="add-event-header">
+                        <div class="title">Add Event</div>
+                        <i class="fas fa-times close"></i>
+                    </div>
+                    <div class="add-event-body">
+                        <div class="add-event-input">
+                            <input type="text" placeholder="Event Name" class="event-name" name="title"/>
+                        </div>
+                        <div class="add-event-input">
+                            <input type="text" placeholder="Event Time From" class="event-time-from" name="start_date"/>
+                        </div>
+                        <div class="add-event-input">
+                            <input type="text" placeholder="Event Time To" class="event-time-to" name="end_date"/>
+                        </div>
+                    </div>
+                    <div class="add-event-footer">
+                        <button class="add-event-btn">Add Event</button>
+                    </div>
+                    
+                </div>
                 <div class="overlay"></div>
 
 
                 {{!-- month calendar --}}
 
 
-                <div class="container calendar-main">
+                <div class="calendar-main">
                     <div class="calendar">
                         <div class="month">
                             <div class="date"></div>
@@ -76,7 +97,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-9">
+        <div class="col-10">
             <div class="right">
                 <div class="week-calendar">
                     <div class="weekdays">

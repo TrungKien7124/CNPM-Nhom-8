@@ -26,10 +26,9 @@ function getMonthDays(day, month, year) {
     
     //show last month days
     var tmp = prevMonthLastDay.getDay();
-    if (tmp > 0) {
-        for (var i = 1, tmpDate = prevMonthLastDay.getDate(); i <= tmp; i++) {
-            days += `<div class="day prev-month"><div>${tmpDate - tmp + i}</div></div>`;
-        }
+    if (tmp == 0) tmp = 7;
+    for (var i = 1, tmpDate = prevMonthLastDay.getDate(); i <= tmp && tmp != 7; i++) {
+        days += `<div class="day prev-month"><div>${tmpDate - tmp + i}</div></div>`;
     }
     //show current month days
     for (var i = 1, n = lastDay.getDate(), currDay = today.getDate(); i <= n; i++) {

@@ -11,6 +11,7 @@ const monthCalendar = document.querySelector('.left .calendar'),
     monthCalendar__goToDate_button = document.querySelector('.calendar .goToDate .goToButton'),
     monthCalendar__addEvent_button = document.querySelector('.add-event'),
     monthCalendar__addEventForm = document.querySelector('.add-event-wrapper'),
+    monthCalendar__editEventForm = document.querySelector('.edit-event-wrapper'),
     left__overlay = document.querySelector('.overlay'),
     monthCalendar__addEventForm_closeButton = document.querySelector('.add-event-wrapper .close'),
     monthCalendar__addEventFrom_addButton = document.querySelector('.add-event-wrapper .add-event-footer .add-event-btn'),
@@ -57,9 +58,14 @@ function init(today, month, year) {
     monthCalendar__days_container.innerHTML = CalendarFunc.getMonthDays(today, month, year);
     weekCalendar__days_container.innerHTML = CalendarFunc.getWeekDays(today, month, year);
     weekCalendar__weekEvents_container.innerHTML = eventFunc.setEventsID(month, year);
-    eventFunc.getEventsList(document.querySelectorAll('.right .events'));
-
-    addDaysListener();
+    eventFunc.getEventsList()
+        .then(() => {
+            addDaysListener();
+            addEventsListener();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }
 
 monthCalendar__goToPrevMonth_button.addEventListener("click", () => {
@@ -158,3 +164,17 @@ monthCalendar__addEventFrom_addButton.addEventListener("click", () => {
     addEventToDatabase(title, start_date, end_date);
     alert(title + start_date + end_date);
 });
+
+function addEventsListener() {
+    document.querySelectorAll('.right .events .event').forEach(
+        (e) => {
+            e.addEventListener("click", () => {
+                monthCalendar__addEventForm.querySelector('.event-name').value = e.querySelector('.title').textContent;
+                monthCalendar__addEventForm.querySelector('.event-time-from').value = e.querySelector('.date').textContent;
+                monthCalendar__addEventForm.querySelector('.event-time-to').value = e.querySelector('.date').textContent;
+                monthCalendar__addEventForm.classList.add('active');
+                left__overlay.style.visibility = 'visible';
+            })
+        }
+    );
+}
