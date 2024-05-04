@@ -6,11 +6,12 @@ let eventFunc = {
         event_date = event_date.replace(/-/g, '/');
         for (let i = 0; i < eventsList.length; i++) {
             console.log(eventsList[i].start_date);
-            if (this.dateComparing(eventsList[i].start_date, event_date)) {
+            if (this.dateComparing(eventsList[i].date, event_date)) {
                 res += `<div class='event'>
                             <div class='id' style="display: none;">${eventsList[i].id}</div>
                             <div class='title'>${eventsList[i].title}</div>
-                            <div class='date' style="display: none;">${eventsList[i].start_date}</div>
+                            <div class='date' style="display: none;">${eventsList[i].date}</div>
+                            <div class='description' style="display: none;">${eventsList[i].description}</div>
                         </div>`;
             }
         }

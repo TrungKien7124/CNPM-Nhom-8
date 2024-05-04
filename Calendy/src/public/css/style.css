@@ -46,9 +46,7 @@ body {
   align-items: center; }
 
 .beside-logo {
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-top: 5px;
+  margin-left: 10px;
   display: flex;
   justify-content: center;
   align-items: center; }
@@ -57,18 +55,15 @@ body {
   display: flex; }
 
 .current-state {
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-top: 5px;
-  height : 51px;
-  padding: 6px;
+  margin-left: 30px;
+  padding: 8px;
   border: 1px solid;
   border-radius: 5px;
   border-color: #dadce0;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer; }
 
@@ -88,91 +83,144 @@ body {
   padding: 8px;
   border-radius: 50%;
   position: relative;
-  transition: background-color 0.3s;
-  /* Hiệu ứng chuyển đổi màu nền */ }
+  transition: background-color 0.3s; }
 
 .prev-state:hover {
   background-color: #f0f0f0; }
 
 .prev-state::before {
   content: "";
-  /* Cần content để pseudo-element hoạt động */
   width: 10px;
-  /* Độ rộng của dấu mũi tên */
   height: 10px;
-  /* Chiều cao của dấu mũi tên */
   border-top: 2px solid #5f6368;
-  /* Đường viền trắng cho dấu mũi tên */
   border-left: 2px solid #5f6368;
-  /* Đường viền trắng cho dấu mũi tên */
   position: absolute;
-  /* Thiết lập phần tử là absolute */
   top: 50%;
-  /* Đẩy lên phía trên 50% */
   left: 55%;
-  /* Di chuyển sang trái 55% */
-  transform: translate(-50%, -50%) rotate(-45deg);
-  /* Di chuyển ngược lại 50% và xoay 135 độ */ }
-.next-state {
-    color: #5f6368;
-    width: 32px;
-    height: 32px;
+  transform: translate(-50%, -50%) rotate(-45deg); }
+
+.container-fluid {
+  position: relative; }
+
+.add-event-form, .edit-event-form {
+  position: absolute;
+  max-width: 300px;
+  max-height: 500px;
+  overflow: hidden;
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 4px 4px 8px #8888888a;
+  top: 20px;
+  left: -300px;
+  z-index: 2;
+  transition: left 0.5s ease-in; }
+  .add-event-form .add-event-header, .edit-event-form .add-event-header {
+    width: 100%;
+    height: 50px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 8px;
-    border-radius: 50%;
-    position: relative;
-    transition: background-color 0.3s;
-    /* Hiệu ứng chuyển đổi màu nền */ }
-.next-state:hover {
-  background-color: #f0f0f0; }
-.next-state::before {
-    content: "";
-    /* Cần content để pseudo-element hoạt động */
-    width: 10px;
-    /* Độ rộng của dấu mũi tên */
-    height: 10px;
-    /* Chiều cao của dấu mũi tên */
-    border-top: 2px solid #5f6368;
-    /* Đường viền trắng cho dấu mũi tên */
-    border-left: 2px solid #5f6368;
-    /* Đường viền trắng cho dấu mũi tên */
-    position: absolute;
-    /* Thiết lập phần tử là absolute */
-    top: 50%;
-    /* Đẩy lên phía trên 50% */
-    left: 45%;
-    /* Di chuyển sang trái 45% */
-    transform: translate(-50%, -50%) rotate(135deg);
+    justify-content: space-between;
+    padding: 0 20px;
+    color: #22CCEE;
+    border-bottom: 1px solid #EFEFEF; }
+    .add-event-form .add-event-header .title, .edit-event-form .add-event-header .title {
+      font-size: 1.2rem;
+      font-weight: 500; }
+    .add-event-form .add-event-header .close, .edit-event-form .add-event-header .close {
+      font-size: 1.5rem;
+      cursor: pointer; }
+      .add-event-form .add-event-header .close:hover, .edit-event-form .add-event-header .close:hover {
+        color: red; }
+  .add-event-form .add-event-body, .edit-event-form .add-event-body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px; }
+    .add-event-form .add-event-body .add-event-input, .edit-event-form .add-event-body .add-event-input {
+      width: 100%;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px; }
+      .add-event-form .add-event-body .add-event-input input, .edit-event-form .add-event-body .add-event-input input {
+        width: 100%;
+        height: 100%;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid black;
+        padding: 0 10px;
+        font-size: 1rem;
+        font-weight: 400;
+        color: #373c4f; }
+        .add-event-form .add-event-body .add-event-input input::placeholder, .edit-event-form .add-event-body .add-event-input input::placeholder {
+          color: #a5a5a5; }
+        .add-event-form .add-event-body .add-event-input input:focus, .edit-event-form .add-event-body .add-event-input input:focus {
+          border-bottom: 1px solid var(--my-cyan); }
+          .add-event-form .add-event-body .add-event-input input:focus::placeholder, .edit-event-form .add-event-body .add-event-input input:focus::placeholder {
+            color: #22CCEE; }
+  .add-event-form .add-event-footer, .edit-event-form .add-event-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    padding-bottom: 20px; }
+    .add-event-form .add-event-footer .add-event-btn, .edit-event-form .add-event-footer .add-event-btn {
+      height: 40px;
+      font-size: 1rem;
+      font-weight: 500;
+      outline: none;
+      border: none;
+      color: white;
+      background-color: #22CCEE;
+      border-radius: 20px;
+      cursor: pointer;
+      padding: 0 10px;
+      text-align: right;
+      box-shadow: 4px 4px 8px #8888888a; }
+      .add-event-form .add-event-footer .add-event-btn:hover, .edit-event-form .add-event-footer .add-event-btn:hover {
+        box-shadow: 4px 4px 8px transparent;
+        border: 0; }
 
-}
+.edit-event-form .add-event-footer {
+  justify-content: space-around; }
+  .edit-event-form .add-event-footer .save-event-btn {
+    height: 40px;
+    font-size: 1rem;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    color: white;
+    background-color: #22CCEE;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 0 10px;
+    text-align: right;
+    box-shadow: 4px 4px 8px #8888888a; }
+    .edit-event-form .add-event-footer .save-event-btn:hover {
+      box-shadow: 4px 4px 8px transparent;
+      border: 0; }
+  .edit-event-form .add-event-footer .remove-event-btn {
+    height: 40px;
+    font-size: 1rem;
+    font-weight: 500;
+    outline: none;
+    border: none;
+    color: white;
+    background-color: red;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 0 10px;
+    text-align: right;
+    box-shadow: 4px 4px 8px #8888888a; }
+    .edit-event-form .add-event-footer .remove-event-btn:hover {
+      box-shadow: 4px 4px 8px transparent;
+      border: 0; }
 
-
-.detail-items {
-  display: flex; }
-
-.login-button {
-  width: 70px;
-  height: 50px;
-  margin-left: auto;
-  border: 1px solid;
-  border-radius: 5px;
-  border-color: #dadce0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  font-weight: 600;
-  cursor: pointer;
-}
-.login-button:hover {
-  background-color: #fff; }
-
-
-
-
-
+.active {
+  left: 10px; }
 
 .left {
   margin-top: 20px;
@@ -190,87 +238,6 @@ body {
     .left .event-button .text-add-event {
       padding: 0 5px;
       font-weight: 500; }
-  .left .add-event-wrapper {
-    position: absolute;
-    left: 50%;
-    width: 100%;
-    max-height: 0px;
-    overflow: hidden;
-    border-radius: 20px;
-    background-color: #fff;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    transition: max-height 0.5s ease-in; }
-    .left .add-event-wrapper .add-event-header {
-      width: 100%;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      color: #22CCEE;
-      border-bottom: 1px solid #EFEFEF; }
-      .left .add-event-wrapper .add-event-header .title {
-        font-size: 1.2rem;
-        font-weight: 500; }
-      .left .add-event-wrapper .add-event-header .close {
-        font-size: 1.5rem;
-        cursor: pointer; }
-        .left .add-event-wrapper .add-event-header .close:hover {
-          color: red; }
-    .left .add-event-wrapper .add-event-body {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      padding: 20px; }
-      .left .add-event-wrapper .add-event-body .add-event-input {
-        width: 100%;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px; }
-        .left .add-event-wrapper .add-event-body .add-event-input input {
-          width: 100%;
-          height: 100%;
-          outline: none;
-          border: none;
-          border-bottom: 1px solid black;
-          padding: 0 10px;
-          font-size: 1rem;
-          font-weight: 400;
-          color: #373c4f; }
-          .left .add-event-wrapper .add-event-body .add-event-input input::placeholder {
-            color: #a5a5a5; }
-          .left .add-event-wrapper .add-event-body .add-event-input input:focus {
-            border-bottom: 1px solid var(--my-cyan); }
-            .left .add-event-wrapper .add-event-body .add-event-input input:focus::placeholder {
-              color: #22CCEE; }
-    .left .add-event-wrapper .add-event-footer {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #fff;
-      padding-bottom: 10px; }
-      .left .add-event-wrapper .add-event-footer .add-event-btn {
-        height: 40px;
-        font-size: 1rem;
-        font-weight: 500;
-        outline: none;
-        border: none;
-        color: #22CCEE;
-        background-color: transparent;
-        border-radius: 20px;
-        cursor: pointer;
-        padding: 0 10px;
-        border: 3px solid #22CCEE;
-        text-align: right; }
-        .left .add-event-wrapper .add-event-footer .add-event-btn:hover {
-          background-color: #CFF8FE;
-          border: 0; }
   .left .edit-event-wrapper {
     position: absolute;
     visibility: hidden; }
@@ -283,8 +250,6 @@ body {
     z-index: 1;
     background-color: rgba(0, 0, 0, 0.3);
     visibility: hidden; }
-  .left .active {
-    max-height: 350px; }
   .left .calendar-main {
     margin-top: 20px;
     border-radius: 40px;
@@ -460,6 +425,7 @@ body {
           background-color: #22CCEE;
           color: white;
           width: 100%;
+          min-height: 100px;
           display: flex;
           justify-content: center;
           align-items: center;

@@ -4,14 +4,14 @@ class Event {
     constructor() {
     }
 
-    getUserValue({title, start_date, end_date}) {
+    getUserValue({title, date, description}) {
         this.title = title;
-        this.start_date = start_date;
-        this.end_date = end_date;
+        this.date = date;
+        this.description = description;
     }
 
     async addEvent() {
-        const query = `INSERT INTO events (title, start_date, end_date) VALUES ('${this.title}', '${this.start_date}', '${this.end_date}')`;
+        const query = `INSERT INTO events (title, date, description) VALUES ('${this.title}', '${this.date}', '${this.description}')`;
         return await databaseQuery(query);
     }
 
@@ -25,8 +25,8 @@ class Event {
         return await databaseQuery(query);
     }
 
-    async updateEvent(id) {
-        const query = `UPDATE events SET title = '${this.title}', start_date = '${this.start_date}', end_date = '${this.end_date}' WHERE id = ${id}`;
+    async updateEvent({id, title, date, description}) {
+        const query = `UPDATE events SET title = '${title}', date = '${date}', description = '${description}' WHERE id = ${id}`;
         return await databaseQuery(query);
     }
 }

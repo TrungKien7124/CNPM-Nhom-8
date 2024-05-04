@@ -1,12 +1,54 @@
 <div class="container-fluid">
+    
+    <div class="add-event-form">
+        <div class="add-event-header">
+            <div class="title">Add Event</div>
+            <i class="fas fa-times close"></i>
+        </div>
+        <div class="add-event-body">
+            <div class="add-event-input">
+                <input type="text" placeholder="Event Name" class="event-name" name="title" />
+            </div>
+            <div class="add-event-input">
+                <input type="text" placeholder="Date" class="event-date" name="date" />
+            </div>
+            <div class="add-event-input">
+                <input type="text" placeholder="Description" class="description" name="description" />
+            </div>
+        </div>
+        <div class="add-event-footer">
+            <button class="add-event-btn">Add Event</button>
+        </div>
+    </div>
+
+    <div class="edit-event-form">
+        <div class="add-event-header">
+            <div class="title">Add Event</div>
+            <i class="fas fa-times close"></i>
+        </div>
+        <div class="add-event-body">
+            <input type="text" class="event-id" style="display: none;" name="id" />
+            <div class="add-event-input">
+                <input type="text" placeholder="Event Name" class="event-name" name="title" />
+            </div>
+            <div class="add-event-input">
+                <input type="text" placeholder="Date" class="event-date" name="date" />
+            </div>
+            <div class="add-event-input">
+                <input type="text" placeholder="Description" class="event-description" name="description" />
+            </div>
+        </div>
+        <div class="add-event-footer">
+            <button class="save-event-btn">Save</button>
+            <button class="remove-event-btn">Remove</button>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-2">
             <div class="left">
 
-
                 {{!-- add event button --}}
-
-
 
                 <button class="add-event event-button">
                     <i class="fas fa-plus icon-add-event"></i>
@@ -14,61 +56,6 @@
                         Add Event
                     </span>
                 </button>
-
-
-                {{!-- add event form --}}
-
-
-                <div class="add-event-wrapper">
-                    <div class="add-event-header">
-                        <div class="title">Add Event</div>
-                        <i class="fas fa-times close"></i>
-                    </div>
-                    <div class="add-event-body">
-                        <div class="add-event-input">
-                            <input type="text" placeholder="Event Name" class="event-name" name="title"/>
-                        </div>
-                        <div class="add-event-input">
-                            <input type="text" placeholder="Event Time From" class="event-time-from" name="start_date"/>
-                        </div>
-                        <div class="add-event-input">
-                            <input type="text" placeholder="Event Time To" class="event-time-to" name="end_date"/>
-                        </div>
-                        <div class="add-event-input">
-                            <input type="text" placeholder="Description" class="description" name="description"/>
-                        </div>
-                    </div>
-                    <div class="add-event-footer">
-                        <button class="add-event-btn">Add Event</button>
-                    </div>
-                    
-                </div>
-                <div class="edit-event-wrapper">
-                    <div class="add-event-header">
-                        <div class="title">Add Event</div>
-                        <i class="fas fa-times close"></i>
-                    </div>
-                    <div class="add-event-body">
-                        <div class="add-event-input">
-                            <input type="text" placeholder="Event Name" class="event-name" name="title"/>
-                        </div>
-                        <div class="add-event-input">
-                            <input type="text" placeholder="Event Time From" class="event-time-from" name="start_date"/>
-                        </div>
-                        <div class="add-event-input">
-                            <input type="text" placeholder="Event Time To" class="event-time-to" name="end_date"/>
-                        </div>
-                    </div>
-                    <div class="add-event-footer">
-                        <button class="add-event-btn">Add Event</button>
-                    </div>
-                    
-                </div>
-                <div class="overlay"></div>
-
-
-                {{!-- month calendar --}}
-
 
                 <div class="calendar-main">
                     <div class="calendar">
