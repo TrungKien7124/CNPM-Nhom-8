@@ -20,13 +20,15 @@ let eventFunc = {
 
     setEventsID: function (month, year) {
         let events = '';
-        let lastMonth = new Date(year, month - 1, 0);
-        let nextMonth = new Date(year, month + 1, 0);
+        let lastYear = month - 1 < 0 ? year - 1 : year;
+        let nextYear = month + 1 > 11 ? year + 1 : year;
+        let lastMonth = month - 1 < 0 ? 11 : month - 1;
+        let nextMonth = month + 1 > 11 ? 0 : month + 1;
         document.querySelectorAll('.week-calendar .day').forEach((e) => {
             if (e.classList.contains('prev-month')) {
-                events += `<div class='events' id='${e.innerText}-${lastMonth.getMonth() + 1}-${lastMonth.getFullYear()}'></div>`;
+                events += `<div class='events' id='${e.innerText}-${lastMonth + 1}-${lastYear}'></div>`;
             } else if (e.classList.contains('next-month')) {
-                events += `<div class='events' id='${e.innerText}-${nextMonth.getMonth() + 1}-${nextMonth.getFullYear()}'></div>`;
+                events += `<div class='events' id='${e.innerText}-${nextMonth + 1}-${nextYear}'></div>`;
             } else {
                 events += `<div class='events' id='${e.innerText}-${month + 1}-${year}'></div>`;
             }
