@@ -10,16 +10,21 @@ const monthCalendar = document.querySelector('.left .calendar'),
     monthCalendar__goToDate_input = document.querySelector('.calendar .goToDate .monthCalendar__goToDate_input'),
     monthCalendar__goToDate_button = document.querySelector('.calendar .goToDate .goToButton'),
     monthCalendar__addEvent_button = document.querySelector('.add-event'),
-    monthCalendar__addEventForm = document.querySelector('.add-event-wrapper'),
-    monthCalendar__editEventForm = document.querySelector('.edit-event-wrapper'),
+    monthCalendar__addEventForm = document.querySelector('.add-event-form'),
+    monthCalendar__editEventForm = document.querySelector('.edit-event-form'),
     left__overlay = document.querySelector('.overlay'),
-    monthCalendar__addEventForm_closeButton = document.querySelector('.add-event-wrapper .close'),
-    monthCalendar__addEventFrom_addButton = document.querySelector('.add-event-wrapper .add-event-footer .add-event-btn'),
+    monthCalendar__addEventForm_closeButton = document.querySelector('.add-event-form .close'),
+    monthCalendar__editEventForm_closeButton = document.querySelector('.edit-event-form .close'),
+    monthCalendar__addEventFrom_addButton = document.querySelector('.add-event-form .add-event-footer .add-event-btn'),
+    monthCalendar__editEventForm_saveButton = document.querySelector('.edit-event-form .save-event-btn'),
+    monthCalendar__editEventForm_removeButton = document.querySelector('.edit-event-form .remove-event-btn'),
     weekCalendar__days_container = document.querySelector('.right .days'),
     weekCalendar__weekEvents_container = document.querySelector('.right .events_container');
 
 const get_event_API = "http://localhost:3000/api/get-events";
 const add_event_API = "http://localhost:3000/api/add-event";
+const delete_event_API = "http://localhost:3000/api/delete-event";
+const update_event_API = "http://localhost:3000/api/update-event";
 
 let tmpDate = new Date();
 let today = tmpDate.getDate();
@@ -125,15 +130,17 @@ function addDaysListener() {
 
 monthCalendar__addEvent_button.addEventListener("click", () => {
     monthCalendar__addEventForm.classList.add('active');
-    left__overlay.style.visibility = 'visible';
 })
 
 monthCalendar__addEventForm_closeButton.addEventListener("click", () => {
     monthCalendar__addEventForm.classList.remove('active');
-    left__overlay.style.visibility = 'hidden';
 })
 
-function addEventToDatabase(title, start_date, end_date) {
+monthCalendar__editEventForm_closeButton.addEventListener("click", () => {
+    monthCalendar__editEventForm.classList.remove('active');
+})
+
+function addEventToDatabase(title, date, description) {
     fetch(add_event_API, {
         method: 'POST',
         headers: {
@@ -141,8 +148,49 @@ function addEventToDatabase(title, start_date, end_date) {
         },
         body: JSON.stringify({
             title: title,
-            start_date: start_date,
-            end_date: end_date
+            date: date,
+            description: description
+        })
+    })
+        .then(response => response.json())
+        .then(() => {
+            init(today, month, year);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
+
+function updateEventToDatabase(id, title, date, description) {
+    fetch(update_event_API, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: id,
+            title: title,
+            date: date,
+            description: description
+        })
+    })
+        .then(response => response.json())
+        .then(() => {
+            init(today, month, year);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
+
+function removeEventFromDatabase(id) {
+    fetch(delete_event_API, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: id
         })
     })
         .then(response => response.json())
@@ -156,24 +204,41 @@ function addEventToDatabase(title, start_date, end_date) {
 
 monthCalendar__addEventFrom_addButton.addEventListener("click", () => {
     monthCalendar__addEventForm.classList.remove('active');
-    left__overlay.style.visibility = 'hidden';
     var title = document.querySelector('input[name="title"]').value;
-    var start_date = document.querySelector('input[name="start_date"]').value;
-    var end_date = document.querySelector('input[name="end_date"]').value;
+    var date = document.querySelector('input[name="date"]').value;
+    var description = document.querySelector('input[name="description"]').value;
 
-    addEventToDatabase(title, start_date, end_date);
-    alert(title + start_date + end_date);
+    addEventToDatabase(title, date, description);
+    alert('added');
+});
+
+monthCalendar__editEventForm_saveButton.addEventListener("click", () => {
+    monthCalendar__editEventForm.classList.remove('active');
+    var id = monthCalendar__editEventForm.querySelector('input[name="id"]').value;
+    var title = monthCalendar__editEventForm.querySelector('input[name="title"]').value;
+    var date = monthCalendar__editEventForm.querySelector('input[name="date"]').value;
+    var description = monthCalendar__editEventForm.querySelector('input[name="description"]').value;
+
+    updateEventToDatabase(id, title, date, description);
+    alert('updated');
+});
+
+monthCalendar__editEventForm_removeButton.addEventListener("click", () => {
+    monthCalendar__editEventForm.classList.remove('active');
+    var id = document.querySelector('input[name="id"]').value;
+    removeEventFromDatabase(id);
+    alert('removed');
 });
 
 function addEventsListener() {
     document.querySelectorAll('.right .events .event').forEach(
         (e) => {
             e.addEventListener("click", () => {
-                monthCalendar__addEventForm.querySelector('.event-name').value = e.querySelector('.title').textContent;
-                monthCalendar__addEventForm.querySelector('.event-time-from').value = e.querySelector('.date').textContent;
-                monthCalendar__addEventForm.querySelector('.event-time-to').value = e.querySelector('.date').textContent;
-                monthCalendar__addEventForm.classList.add('active');
-                left__overlay.style.visibility = 'visible';
+                monthCalendar__editEventForm.querySelector('.event-id').value = e.querySelector('.id').textContent;
+                monthCalendar__editEventForm.querySelector('.event-name').value = e.querySelector('.title').textContent;
+                monthCalendar__editEventForm.querySelector('.event-date').value = e.querySelector('.date').textContent;
+                monthCalendar__editEventForm.querySelector('.event-description').value = e.querySelector('.description').textContent;
+                monthCalendar__editEventForm.classList.add('active');
             })
         }
     );

@@ -23,7 +23,27 @@ let APIController = {
             .catch((err) => {
                 return res.status(500).json({error: err.message});
             });
-    }
+    },
+
+    updateEvent(req, res) {
+        eventManagement.updateEvent(req.body)
+            .then(() => {
+                return res.status(200).json({message: 'Update event successfully!'});
+            })
+            .catch((err) => {
+                return res.status(500).json({error: err.message});
+            });
+    },
+
+    deleteEvent(req, res) {
+        eventManagement.deleteEvent(req.body.id)
+            .then(() => {
+                return res.status(200).json({message: 'Delete event successfully!'});
+            })
+            .catch((err) => {
+                return res.status(500).json({error: err.message});
+            });
+    },
 }
 
 module.exports = APIController;
