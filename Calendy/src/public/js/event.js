@@ -1,4 +1,8 @@
 const get_event_API = "http://localhost:3000/api/get-events";
+const add_event_API = "http://localhost:3000/api/add-event";
+const delete_event_API = "http://localhost:3000/api/delete-event";
+const update_event_API = "http://localhost:3000/api/update-event";
+
 
 let eventFunc = {
     showEvents: function (eventsList, event_date) {
@@ -63,6 +67,89 @@ let eventFunc = {
             }
         }
         return true;
+    },
+
+    addEventToDatabase: function (title, date, description) {
+        return new Promise((resolve, reject) => {
+            fetch(add_event_API, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: title,
+                    date: date,
+                    description: description
+                })
+            })
+                .then(() => {
+                    resolve();
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    reject(error);
+                });
+        });       
+    },
+
+    updateEventToDatabase: function (id, title, date, description) {
+        return new Promise((resolve, reject) => {
+            fetch(update_event_API, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: id,
+                    title: title,
+                    date: date,
+                    description: description
+                })
+            })
+                .then(() => {
+                    resolve();
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    reject(error);
+                });
+        });
+    },
+
+    removeEventFromDatabase: function (id) {
+        return new Promise((resolve, reject) => {
+            fetch(delete_event_API, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: id
+                })
+            })
+                .then(() => {
+                    resolve();
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    reject(error);
+                });
+        });
+    },
+
+    addEventsListener: function() {
+        const monthCalendar__editEventForm = document.querySelector('.edit-event-form');
+        document.querySelectorAll('.right .events .event').forEach(
+            (e) => {
+                e.addEventListener("click", () => {
+                    monthCalendar__editEventForm.querySelector('.event-id').value = e.querySelector('.id').textContent;
+                    monthCalendar__editEventForm.querySelector('.event-name').value = e.querySelector('.title').textContent;
+                    monthCalendar__editEventForm.querySelector('.event-date').value = e.querySelector('.date').textContent;
+                    monthCalendar__editEventForm.querySelector('.event-description').value = e.querySelector('.description').textContent;
+                    monthCalendar__editEventForm.classList.add('active');
+                })
+            }
+        );
     }
 };
 

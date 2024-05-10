@@ -1,3 +1,7 @@
+const monthCalendar__goToPrevMonth_button = document.querySelector('.calendar .prev'),
+monthCalendar__goToNextMonth_button = document.querySelector('.calendar .next');
+
+
 let months = [
     "January",
     "February",
@@ -98,7 +102,20 @@ function getWeekDays(day, month, year) {
     return days;
 }
 
+function addDaysListener(month, year, show) {
+    document.querySelectorAll('.left .day:not(.prev-month, .next-month)').forEach(
+        (e) => {
+            e.addEventListener("click", () => {
+                document.querySelector('.day.active').classList.remove('active');
+                e.classList.add('active');
+                show(e.innerText, month, year);
+            })
+        }
+    );
+}
+
 const CalendarFunc = {
+    addDaysListener,
     getMonthDate,
     getMonthDays,
     getWeekDays

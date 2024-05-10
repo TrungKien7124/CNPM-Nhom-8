@@ -1,4 +1,4 @@
-import CalendarFunc from './calendar.js';
+import calendarFunc from './calendar.js';
 import eventFunc from './event.js';
 
 const monthCalendar = document.querySelector('.left .calendar'),
@@ -12,7 +12,6 @@ const monthCalendar = document.querySelector('.left .calendar'),
     monthCalendar__addEvent_button = document.querySelector('.add-event'),
     monthCalendar__addEventForm = document.querySelector('.add-event-form'),
     monthCalendar__editEventForm = document.querySelector('.edit-event-form'),
-    left__overlay = document.querySelector('.overlay'),
     monthCalendar__addEventForm_closeButton = document.querySelector('.add-event-form .close'),
     monthCalendar__editEventForm_closeButton = document.querySelector('.edit-event-form .close'),
     monthCalendar__addEventFrom_addButton = document.querySelector('.add-event-form .add-event-footer .add-event-btn'),
@@ -21,225 +20,138 @@ const monthCalendar = document.querySelector('.left .calendar'),
     weekCalendar__days_container = document.querySelector('.right .days'),
     weekCalendar__weekEvents_container = document.querySelector('.right .events_container');
 
-const get_event_API = "http://localhost:3000/api/get-events";
-const add_event_API = "http://localhost:3000/api/add-event";
-const delete_event_API = "http://localhost:3000/api/delete-event";
-const update_event_API = "http://localhost:3000/api/update-event";
-
 let tmpDate = new Date();
 let today = tmpDate.getDate();
 let month = tmpDate.getMonth();
 let year = tmpDate.getFullYear();
 
-let weekdays = [
-    "Monday",
-    "Tueday",
-    "Wednesday",
-    "Thursday",
-    "Saturday",
-    "Friday",
-    "Sunday",
-]
+// khoi tao event listener cho cac button
+function init() {
 
-let months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-]
+    // chuyen den lich thang truoc hoac thang tiep theo
+    monthCalendar__goToPrevMonth_button.addEventListener("click", () => {
+        month--;
+        if (month < 0) {
+            month = 11;
+            year--;
+        }
+        show(today, month, year);
+    });
+    
+    monthCalendar__goToNextMonth_button.addEventListener("click", () => {
+        month++;
+        if (month > 11) {
+            month = 0;
+            year++;
+        }
+        show(today, month, year);
+    
+    });
 
-function init(today, month, year) {
-    // show date
-    monthCalendar__date.innerHTML = CalendarFunc.getMonthDate(month, year);
+    // nhap ngay de chuyen den lich cua thang do
+    monthCalendar__date.addEventListener("click", () => {
+        monthCalendar__date.style.visibility = 'hidden';
+        monthCalendar__goToDate_form.style.visibility = 'visible';
+    });
 
-    monthCalendar__days_container.innerHTML = CalendarFunc.getMonthDays(today, month, year);
-    weekCalendar__days_container.innerHTML = CalendarFunc.getWeekDays(today, month, year);
+    monthCalendar__goToDate_button.addEventListener("click", () => {
+
+        var newDate = monthCalendar__goToDate_input.value;
+        var dateRegex = /^(0[1-9]|1[0-2])\/\d{4}$/;
+        if (dateRegex.test(newDate)) {
+            tmp = newDate.split("/");
+            month = parseInt(tmp[0]) - 1;
+            year = parseInt(tmp[1]);
+            show(today, month, year);
+    
+        } else {
+            alert("Invalid Date!\nInput format: mm/yyyy !");
+        }
+        monthCalendar__date.style.visibility = 'visible';
+        monthCalendar__goToDate_form.style.visibility = 'hidden';
+    });
+
+
+    // cac button cho form them va sua su kien
+    monthCalendar__addEvent_button.addEventListener("click", () => {
+        monthCalendar__addEventForm.classList.add('active');
+    })
+    
+    monthCalendar__addEventForm_closeButton.addEventListener("click", () => {
+        monthCalendar__addEventForm.classList.remove('active');
+    })
+    
+    monthCalendar__editEventForm_closeButton.addEventListener("click", () => {
+        monthCalendar__editEventForm.classList.remove('active');
+    })
+
+    // nut them moi su kien
+    monthCalendar__addEventFrom_addButton.addEventListener("click", () => {
+        monthCalendar__addEventForm.classList.remove('active');
+        var title = document.querySelector('input[name="title"]').value;
+        var date = document.querySelector('input[name="date"]').value;
+        var description = document.querySelector('input[name="description"]').value;
+    
+        eventFunc.addEventToDatabase(title, date, description)
+            .then(() => {
+                show(today, month, year);
+                alert('saved');
+            })  
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    });
+    
+    // nut luu su kien da sua
+    monthCalendar__editEventForm_saveButton.addEventListener("click", () => {
+        monthCalendar__editEventForm.classList.remove('active');
+        var id = monthCalendar__editEventForm.querySelector('input[name="id"]').value;
+        var title = monthCalendar__editEventForm.querySelector('input[name="title"]').value;
+        var date = monthCalendar__editEventForm.querySelector('input[name="date"]').value;
+        var description = monthCalendar__editEventForm.querySelector('input[name="description"]').value;
+    
+        eventFunc.updateEventToDatabase(id, title, date, description)
+            .then(() => {   
+                show(today, month, year);
+                alert('saved');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    });
+    
+    // nut xoa su kien
+    monthCalendar__editEventForm_removeButton.addEventListener("click", () => {
+        monthCalendar__editEventForm.classList.remove('active');
+        var id = document.querySelector('input[name="id"]').value;
+        eventFunc.removeEventFromDatabase(id)
+            .then(() => {
+                show(today, month, year);
+                alert('removed');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    });
+
+    // show ket qua ra man hinh
+    show(today, month, year);
+}
+
+// hien thi ra man hinh
+function show(today, month, year) {
+    monthCalendar__date.innerHTML = calendarFunc.getMonthDate(month, year);
+    monthCalendar__days_container.innerHTML = calendarFunc.getMonthDays(today, month, year);
+    weekCalendar__days_container.innerHTML = calendarFunc.getWeekDays(today, month, year);
     weekCalendar__weekEvents_container.innerHTML = eventFunc.setEventsID(month, year);
     eventFunc.getEventsList()
         .then(() => {
-            addDaysListener();
-            addEventsListener();
+            calendarFunc.addDaysListener(month, year, show);
+            eventFunc.addEventsListener();
         })
         .catch((error) => {
             console.error('Error:', error);
         });
 }
 
-monthCalendar__goToPrevMonth_button.addEventListener("click", () => {
-    month--;
-    if (month < 0) {
-        month = 11;
-        year--;
-    }
-    init(today, month, year);
-});
-
-monthCalendar__goToNextMonth_button.addEventListener("click", () => {
-    month++;
-    if (month > 11) {
-        month = 0;
-        year++;
-    }
-    init(today, month, year);
-
-});
-
-monthCalendar__date.addEventListener("click", () => {
-    monthCalendar__date.style.visibility = 'hidden';
-    monthCalendar__goToDate_form.style.visibility = 'visible';
-});
-
-monthCalendar__goToDate_button.addEventListener("click", () => {
-
-    var newDate = monthCalendar__goToDate_input.value;
-    var dateRegex = /^(0[1-9]|1[0-2])\/\d{4}$/;
-    if (dateRegex.test(newDate)) {
-        tmp = newDate.split("/");
-        month = parseInt(tmp[0]) - 1;
-        year = parseInt(tmp[1]);
-        init(today, month, year);
-
-    } else {
-        alert("Invalid Date!\nInput format: mm/yyyy !");
-    }
-    monthCalendar__date.style.visibility = 'visible';
-    monthCalendar__goToDate_form.style.visibility = 'hidden';
-});
-
-init(today, month, year);
-
-function addDaysListener() {
-    document.querySelectorAll('.left .day:not(.prev-month, .next-month)').forEach(
-        (e) => {
-            e.addEventListener("click", () => {
-                document.querySelector('.day.active').classList.remove('active');
-                e.classList.add('active');
-                init(e.innerText, month, year);
-            })
-        }
-    );
-}
-
-monthCalendar__addEvent_button.addEventListener("click", () => {
-    monthCalendar__addEventForm.classList.add('active');
-})
-
-monthCalendar__addEventForm_closeButton.addEventListener("click", () => {
-    monthCalendar__addEventForm.classList.remove('active');
-})
-
-monthCalendar__editEventForm_closeButton.addEventListener("click", () => {
-    monthCalendar__editEventForm.classList.remove('active');
-})
-
-function addEventToDatabase(title, date, description) {
-    fetch(add_event_API, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            title: title,
-            date: date,
-            description: description
-        })
-    })
-        .then(response => response.json())
-        .then(() => {
-            init(today, month, year);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-}
-
-function updateEventToDatabase(id, title, date, description) {
-    fetch(update_event_API, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            id: id,
-            title: title,
-            date: date,
-            description: description
-        })
-    })
-        .then(response => response.json())
-        .then(() => {
-            init(today, month, year);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-}
-
-function removeEventFromDatabase(id) {
-    fetch(delete_event_API, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            id: id
-        })
-    })
-        .then(response => response.json())
-        .then(() => {
-            init(today, month, year);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-}
-
-monthCalendar__addEventFrom_addButton.addEventListener("click", () => {
-    monthCalendar__addEventForm.classList.remove('active');
-    var title = document.querySelector('input[name="title"]').value;
-    var date = document.querySelector('input[name="date"]').value;
-    var description = document.querySelector('input[name="description"]').value;
-
-    addEventToDatabase(title, date, description);
-    alert('added');
-});
-
-monthCalendar__editEventForm_saveButton.addEventListener("click", () => {
-    monthCalendar__editEventForm.classList.remove('active');
-    var id = monthCalendar__editEventForm.querySelector('input[name="id"]').value;
-    var title = monthCalendar__editEventForm.querySelector('input[name="title"]').value;
-    var date = monthCalendar__editEventForm.querySelector('input[name="date"]').value;
-    var description = monthCalendar__editEventForm.querySelector('input[name="description"]').value;
-
-    updateEventToDatabase(id, title, date, description);
-    alert('updated');
-});
-
-monthCalendar__editEventForm_removeButton.addEventListener("click", () => {
-    monthCalendar__editEventForm.classList.remove('active');
-    var id = document.querySelector('input[name="id"]').value;
-    removeEventFromDatabase(id);
-    alert('removed');
-});
-
-function addEventsListener() {
-    document.querySelectorAll('.right .events .event').forEach(
-        (e) => {
-            e.addEventListener("click", () => {
-                monthCalendar__editEventForm.querySelector('.event-id').value = e.querySelector('.id').textContent;
-                monthCalendar__editEventForm.querySelector('.event-name').value = e.querySelector('.title').textContent;
-                monthCalendar__editEventForm.querySelector('.event-date').value = e.querySelector('.date').textContent;
-                monthCalendar__editEventForm.querySelector('.event-description').value = e.querySelector('.description').textContent;
-                monthCalendar__editEventForm.classList.add('active');
-            })
-        }
-    );
-}
+init();
