@@ -15,8 +15,7 @@ let APIController = {
     },
 
     addEvent(req, res) {
-        eventManagement.getUserValue(req.body);
-        eventManagement.addEvent()
+        eventManagement.addEvent(req.body)
             .then(() => {
                 return res.status(200).json({message: 'Add event successfully!'});
             })

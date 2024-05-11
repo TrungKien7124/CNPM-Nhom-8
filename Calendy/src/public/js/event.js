@@ -6,20 +6,23 @@ const update_event_API = "http://localhost:3000/api/update-event";
 
 let eventFunc = {
     showEvents: function (eventsList, event_date) {
-        let res = '';
+        let res = [];
         event_date = event_date.replace(/-/g, '/');
         for (let i = 0; i < eventsList.length; i++) {
             console.log(eventsList[i].start_date);
             if (this.dateComparing(eventsList[i].date, event_date)) {
-                res += `<div class='event'>
-                            <div class='id' style="display: none;">${eventsList[i].id}</div>
-                            <div class='title'>${eventsList[i].title}</div>
-                            <div class='date' style="display: none;">${eventsList[i].date}</div>
-                            <div class='description' style="display: none;">${eventsList[i].description}</div>
-                        </div>`;
+                res.push(eventsList[i]);
             }
         }
-        return res;
+        res.sort(this.timeComparing);
+        return res.map((item) => `<div class='event'>
+                            <div class='type'></div>
+                            <div class='id' style="display: none;">${item.id}</div>
+                            <div class='title'>${item.title}</div>
+                            <div class='time'>${item.time}</div>
+                            <div class='date' style="display: none;">${item.date}</div>
+                            <div class='description' style="display: none;">${item.description}</div>
+                        </div>`).join('');
     },
 
     setEventsID: function (month, year) {
@@ -69,7 +72,16 @@ let eventFunc = {
         return true;
     },
 
-    addEventToDatabase: function (title, date, description) {
+    timeComparing: function (a, b) {
+        let tmp1 = a.time.split(':').map(e => parseInt(e));
+        let tmp2 = b.time.split(':').map(e => parseInt(e));
+        if (tmp1[0] == tmp2[0]) {
+            return tmp1[1] - tmp2[1];
+        }
+        return tmp1[0] - tmp2[0];
+    },
+
+    addEventToDatabase: function (title, time, date, description) {
         return new Promise((resolve, reject) => {
             fetch(add_event_API, {
                 method: 'POST',
@@ -78,6 +90,7 @@ let eventFunc = {
                 },
                 body: JSON.stringify({
                     title: title,
+                    time: time,
                     date: date,
                     description: description
                 })
@@ -92,7 +105,7 @@ let eventFunc = {
         });       
     },
 
-    updateEventToDatabase: function (id, title, date, description) {
+    updateEventToDatabase: function (id, title, time, date, description) {
         return new Promise((resolve, reject) => {
             fetch(update_event_API, {
                 method: 'POST',
@@ -102,6 +115,7 @@ let eventFunc = {
                 body: JSON.stringify({
                     id: id,
                     title: title,
+                    time: time,
                     date: date,
                     description: description
                 })
@@ -144,6 +158,7 @@ let eventFunc = {
                 e.addEventListener("click", () => {
                     monthCalendar__editEventForm.querySelector('.event-id').value = e.querySelector('.id').textContent;
                     monthCalendar__editEventForm.querySelector('.event-name').value = e.querySelector('.title').textContent;
+                    monthCalendar__editEventForm.querySelector('.event-time').value = e.querySelector('.time').textContent;
                     monthCalendar__editEventForm.querySelector('.event-date').value = e.querySelector('.date').textContent;
                     monthCalendar__editEventForm.querySelector('.event-description').value = e.querySelector('.description').textContent;
                     monthCalendar__editEventForm.classList.add('active');
