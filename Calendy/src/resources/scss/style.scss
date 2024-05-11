@@ -1,13 +1,13 @@
-$bodyBackground: linear-gradient(to bottom right, #EAE7F1, #E1F3FE);
-$containerBackground: #fff;
+$backgroundColor1: #fafbfc;
+$backgroundColor2: #fff;
 $textBackground: #CFF8FE;
-$textColor1: #000;
-$textColor2: #22CCEE;
-$textColor3: #878895;
-$boderColor: #EFEFEF;
+$textColor1: #323b4b;
+$textColor2: #005ff9;
+$textColor3: #8a94a6;
+$boderColor: #dadce0;
 
 body {
-    background-image: $bodyBackground;
+    background-color: $backgroundColor2;
 }
 
 .header {
@@ -76,7 +76,7 @@ body {
     padding: 8px;
     border: 1px solid;
     border-radius: 5px;
-    border-color: #dadce0;
+    border-color: $boderColor;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -136,13 +136,14 @@ body {
     position: relative;
 }
 
-.add-event-form, .edit-event-form {
+.add-event-form,
+.edit-event-form {
     position: absolute;
     max-width: 300px;
     max-height: 500px;
     overflow: hidden;
     border-radius: 20px;
-    background-color: $containerBackground;
+    background-color: $backgroundColor2;
     box-shadow: 4px 4px 8px #8888888a;
     top: 20px;
     left: -300px;
@@ -166,6 +167,7 @@ body {
 
         .close {
             font-size: 1.5rem;
+            color: $textColor1;
             cursor: pointer;
 
             &:hover {
@@ -220,7 +222,7 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: $containerBackground;
+        background-color: $backgroundColor2;
         padding-bottom: 20px;
 
         .add-event-btn {
@@ -236,9 +238,12 @@ body {
             padding: 0 10px;
             text-align: right;
             box-shadow: 4px 4px 8px #8888888a;
+            ;
 
             &:hover {
                 box-shadow: 4px 4px 8px transparent;
+                transform: translateX(-2px);
+                transform: translateX(2px);
                 border: 0;
             }
         }
@@ -246,46 +251,51 @@ body {
 }
 
 .edit-event-form {
-    .add-event-footer{
+    .add-event-footer {
         justify-content: space-around;
 
-        .save-event-btn{
+        .save-event-btn {
             height: 40px;
-                font-size: 1rem;
-                font-weight: 500;
-                outline: none;
-                border: none;
-                color: white;
-                background-color: $textColor2;
-                border-radius: 20px;
-                cursor: pointer;
-                padding: 0 10px;
-                text-align: right;
-                box-shadow: 4px 4px 8px #8888888a;
+            font-size: 1rem;
+            font-weight: 500;
+            outline: none;
+            border: none;
+            color: white;
+            background-color: $textColor2;
+            border-radius: 20px;
+            cursor: pointer;
+            padding: 0 10px;
+            text-align: right;
+            box-shadow: 4px 4px 8px #8888888a;
 
-                &:hover {
-                    box-shadow: 4px 4px 8px transparent;
-                    border: 0;
-                }
+            &:hover {
+                box-shadow: 4px 4px 8px transparent;
+                transform: translateX(-2px);
+                transform: translateX(2px);
+                border: 0;
+            }
         }
-        .remove-event-btn{  
-            height: 40px;
-                font-size: 1rem;
-                font-weight: 500;
-                outline: none;
-                border: none;
-                color: white;
-                background-color: red;
-                border-radius: 20px;
-                cursor: pointer;
-                padding: 0 10px;
-                text-align: right;
-                box-shadow: 4px 4px 8px #8888888a;
 
-                &:hover {
-                    box-shadow: 4px 4px 8px transparent;
-                    border: 0;
-                }
+        .remove-event-btn {
+            height: 40px;
+            font-size: 1rem;
+            font-weight: 500;
+            outline: none;
+            border: none;
+            color: white;
+            background-color: red;
+            border-radius: 20px;
+            cursor: pointer;
+            padding: 0 10px;
+            text-align: right;
+            box-shadow: 4px 4px 8px #8888888a;
+
+            &:hover {
+                box-shadow: 4px 4px 8px transparent;
+                transform: translateX(-2px);
+                transform: translateX(2px);
+                border: 0;
+            }
         }
     }
 }
@@ -297,48 +307,42 @@ body {
 
 .left {
     margin-top: 20px;
+    min-height: 100vh;
     position: relative;
+    background-color: $backgroundColor2;
 
     .event-button {
+        border-width: 0px;
         border-radius: 25px;
-        border: 3px solid white;
-        background-color: white;
+        background-color: $textColor2;
+        color: $backgroundColor2;
         padding: 2px 10px;
-        min-width: 100px;
         min-height: 48px;
         align-items: center;
+        display: flex;
+        box-shadow: 4px 4px 8px #8888888a;
 
         .icon-add-event {
             padding: 0 5px;
+            font-size: 150%;
         }
 
         .text-add-event {
             padding: 0 5px;
             font-weight: 500;
         }
-    }
 
-    .edit-event-wrapper {
-        position: absolute;
-        visibility: hidden;
-    }
-
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 1;
-        background-color: rgba(0, 0, 0, 0.3);
-        visibility: hidden;
+        &:hover {
+            box-shadow: 4px 4px 8px transparent;
+            transform: translateY(2px);
+        }
     }
 
     .calendar-main {
         margin-top: 20px;
-        border-radius: 40px;
         padding: 0 20px;
-        background-color: $containerBackground;
+        background-color: $backgroundColor2;
+        border-top: 2px solid $textColor3;
 
         .calendar {
             position: relative;
@@ -435,7 +439,7 @@ body {
 
             .days {
                 width: 100%;
-                font-size: 100%;
+                font-size: 70%;
                 font-weight: 500;
                 margin-bottom: 20px;
                 display: flex;
@@ -445,19 +449,25 @@ body {
                 .day {
                     width: 14.285%;
                     height: 0;
-                    // ky thuat Aspect Ratio de cho width = height
+                    // ky thuat Aspect Ratio de tao ra mot div co width = height
                     padding-top: 14.285%;
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     cursor: pointer;
-                    color: $textColor2;
+                    color: $textColor1;
                     margin-bottom: 5px;
                     position: relative;
 
                     &:not(.prev-month):not(.active):not(.next-month):hover {
-                        background-color: #eee;
+                        background-color: $boderColor;
                         border-radius: 50%;
+                    }
+
+                    .active {
+                        color: $backgroundColor2;
+                        background-color: $textColor2;
+                        border-radius: 5px;
                     }
 
                     div {
@@ -470,12 +480,6 @@ body {
                         align-items: center;
                         justify-content: center;
                     }
-                }
-
-                .active {
-                    color: $textColor2;
-                    background-color: $textBackground;
-                    border-radius: 50%;
                 }
 
                 .prev-month,
@@ -491,7 +495,7 @@ body {
 
 
 .right {
-    background-color: white;
+    background-color: $backgroundColor2;
     min-height: 100vh;
     margin-top: 20px;
 
@@ -503,6 +507,8 @@ body {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            border: 2px solid $boderColor;
+            border-bottom: 0px;
 
             div {
                 width: 14.285%;
@@ -513,8 +519,13 @@ body {
                 font-size: 1.5rem;
                 font-weight: 500;
                 text-transform: capitalize;
+                border-left: 2px solid $boderColor;
 
+                &:first-child {
+                    border-left: 0px;
+                }
             }
+
 
             .weekend {
                 color: red;
@@ -525,22 +536,27 @@ body {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            border: 2px solid $boderColor;
+            border-top: 0px;
+            border-bottom: 0px;
 
             .day {
                 width: 14.285%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-size: 2rem;
+                font-size: 1.5rem;
                 color: $textColor1;
-                margin: auto;
+                font-weight: 500;
+                border-left: 2px solid $boderColor;
+
+                &:first-child {
+                    border-left: 0px;
+                }
             }
 
             .active {
                 color: $textColor2;
-                font-size: 2.5rem;
-                border-bottom: 3px solid $boderColor;
-                border-radius: 5px;
             }
         }
 
@@ -548,28 +564,54 @@ body {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            background-color: $backgroundColor1;
+            border: 2px solid $boderColor;
+            border-top: 0px;
 
             .events {
                 width: 14.285%;
                 min-height: 100vh;
                 display: flex;
                 align-items: center;
-                font-size: 2rem;
-                color: var(--my-cyan);
-                border-left: 3px solid $boderColor;
-                border-top: 3px solid $boderColor;
+                font-size: 1.5rem;
+                border-left: 2px solid $boderColor;
+                border-top: 2px solid $boderColor;
                 flex-direction: column;
 
                 .event {
-                    background-color: $textColor2;
-                    color: white;
-                    width: 100%;
-                    min-height: 100px;
+                    background-color: $backgroundColor2;
+                    color: $textColor1;
+                    width: 90%;
                     display: flex;
+                    flex-direction: column;
                     justify-content: center;
                     align-items: center;
                     cursor: pointer;
-                    margin-bottom: 5px;
+                    margin-top: 10px;
+                    border-bottom: 3px solid $boderColor;
+                    overflow-x: hidden;
+
+                    .type {
+                        display: block;
+                        width: 100%;
+                        height: 10px;
+                        border-radius: 5px;
+                        background-color: $textColor2;
+                    }
+
+                    .title {
+                        width: 100%;
+                        font-weight: 500;
+                        text-align: left;
+                        padding-left: 10px;
+                    }
+
+                    .time {
+                        width: 100%;
+                        font-size: 1rem;
+                        text-align: left;
+                        padding-left: 20px;
+                    }
                 }
 
                 &:first-child {

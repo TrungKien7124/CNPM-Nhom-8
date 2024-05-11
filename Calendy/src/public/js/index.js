@@ -89,10 +89,11 @@ function init() {
     monthCalendar__addEventFrom_addButton.addEventListener("click", () => {
         monthCalendar__addEventForm.classList.remove('active');
         var title = document.querySelector('input[name="title"]').value;
+        var time = document.querySelector('input[name="time"]').value;
         var date = document.querySelector('input[name="date"]').value;
         var description = document.querySelector('input[name="description"]').value;
     
-        eventFunc.addEventToDatabase(title, date, description)
+        eventFunc.addEventToDatabase(title, time, date, description)
             .then(() => {
                 show(today, month, year);
                 alert('saved');
@@ -107,10 +108,11 @@ function init() {
         monthCalendar__editEventForm.classList.remove('active');
         var id = monthCalendar__editEventForm.querySelector('input[name="id"]').value;
         var title = monthCalendar__editEventForm.querySelector('input[name="title"]').value;
+        var time = monthCalendar__editEventForm.querySelector('input[name="time"]').value;
         var date = monthCalendar__editEventForm.querySelector('input[name="date"]').value;
         var description = monthCalendar__editEventForm.querySelector('input[name="description"]').value;
     
-        eventFunc.updateEventToDatabase(id, title, date, description)
+        eventFunc.updateEventToDatabase(id, title, time, date, description)
             .then(() => {   
                 show(today, month, year);
                 alert('saved');

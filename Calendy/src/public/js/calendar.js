@@ -37,7 +37,7 @@ function getMonthDays(day, month, year) {
     //show current month days
     for (var i = 1, n = lastDay.getDate(), currDay = today.getDate(); i <= n; i++) {
         if (i == currDay) {
-            days += `<div class="day today active"><div>${i}</div></div>`;
+            days += `<div class="day"><div class="active">${i}</div></div>`;
         } else {
             days += `<div class="day "><div>${i}</div></div>`;
         }
@@ -106,8 +106,8 @@ function addDaysListener(month, year, show) {
     document.querySelectorAll('.left .day:not(.prev-month, .next-month)').forEach(
         (e) => {
             e.addEventListener("click", () => {
-                document.querySelector('.day.active').classList.remove('active');
-                e.classList.add('active');
+                // document.querySelector('.day.active').classList.remove('active');
+                // e.classList.add('active');
                 show(e.innerText, month, year);
             })
         }
