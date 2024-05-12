@@ -14,9 +14,14 @@ let eventFunc = {
                 res.push(eventsList[i]);
             }
         }
+        let colorMap = {
+            'work': '#006ff9',
+            'education': '#ffcc00',
+            'personal': '#ff5630',
+        };
         res.sort(this.timeComparing);
         return res.map((item) => `<div class='event'>
-                            <div class='type'></div>
+                            <div class='type' style='background-color: ${colorMap[item.type]}'>${item.type}</div>
                             <div class='id' style="display: none;">${item.id}</div>
                             <div class='title'>${item.title}</div>
                             <div class='time'>${item.time}</div>
@@ -81,7 +86,7 @@ let eventFunc = {
         return tmp1[0] - tmp2[0];
     },
 
-    addEventToDatabase: function (title, time, date, description) {
+    addEventToDatabase: function (title, time, date, description, type) {
         return new Promise((resolve, reject) => {
             fetch(add_event_API, {
                 method: 'POST',
@@ -92,7 +97,8 @@ let eventFunc = {
                     title: title,
                     time: time,
                     date: date,
-                    description: description
+                    description: description,
+                    type: type
                 })
             })
                 .then(() => {
@@ -105,7 +111,7 @@ let eventFunc = {
         });       
     },
 
-    updateEventToDatabase: function (id, title, time, date, description) {
+    updateEventToDatabase: function (id, title, time, date, description, type) {
         return new Promise((resolve, reject) => {
             fetch(update_event_API, {
                 method: 'POST',
@@ -117,7 +123,8 @@ let eventFunc = {
                     title: title,
                     time: time,
                     date: date,
-                    description: description
+                    description: description,
+                    type: type
                 })
             })
                 .then(() => {
@@ -161,6 +168,7 @@ let eventFunc = {
                     monthCalendar__editEventForm.querySelector('.event-time').value = e.querySelector('.time').textContent;
                     monthCalendar__editEventForm.querySelector('.event-date').value = e.querySelector('.date').textContent;
                     monthCalendar__editEventForm.querySelector('.event-description').value = e.querySelector('.description').textContent;
+                    monthCalendar__editEventForm.querySelector('select').value = e.querySelector('.type').textContent;
                     monthCalendar__editEventForm.classList.add('active');
                 })
             }

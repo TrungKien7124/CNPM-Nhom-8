@@ -173,6 +173,14 @@ body {
           .add-event-form .add-event-body .add-event-input input:focus::placeholder,
           .edit-event-form .add-event-body .add-event-input input:focus::placeholder {
             color: #005ff9; }
+    .add-event-form .add-event-body select,
+    .edit-event-form .add-event-body select {
+      margin-top: 10px;
+      width: 45%;
+      outline: none;
+      border: none;
+      border-bottom: 1px solid black;
+      font-weight: 500; }
   .add-event-form .add-event-footer,
   .edit-event-form .add-event-footer {
     display: flex;
@@ -458,14 +466,16 @@ body {
           align-items: center;
           cursor: pointer;
           margin-top: 10px;
-          border-bottom: 3px solid #dadce0;
-          overflow-x: hidden; }
+          border-bottom: 2px solid #dadce0;
+          border-left: 2px solid #dadce0;
+          overflow-x: hidden;
+          box-shadow: 4px 4px 8px #8888888a; }
           .right .week-calendar .events_container .events .event .type {
             display: block;
             width: 100%;
             height: 10px;
             border-radius: 5px;
-            background-color: #005ff9; }
+            color: transparent; }
           .right .week-calendar .events_container .events .event .title {
             width: 100%;
             font-weight: 500;
@@ -476,5 +486,9 @@ body {
             font-size: 1rem;
             text-align: left;
             padding-left: 20px; }
+          .right .week-calendar .events_container .events .event:hover {
+            box-shadow: 4px 4px 8px transparent;
+            transform: translateY(2px);
+            transform: translateX(-2px); }
         .right .week-calendar .events_container .events:first-child {
           border-left: 0; }

@@ -92,8 +92,9 @@ function init() {
         var time = document.querySelector('input[name="time"]').value;
         var date = document.querySelector('input[name="date"]').value;
         var description = document.querySelector('input[name="description"]').value;
-    
-        eventFunc.addEventToDatabase(title, time, date, description)
+        var type = document.querySelector('select[name="type"]').value;
+        alert(type);
+        eventFunc.addEventToDatabase(title, time, date, description, type)
             .then(() => {
                 show(today, month, year);
                 alert('saved');
@@ -111,8 +112,9 @@ function init() {
         var time = monthCalendar__editEventForm.querySelector('input[name="time"]').value;
         var date = monthCalendar__editEventForm.querySelector('input[name="date"]').value;
         var description = monthCalendar__editEventForm.querySelector('input[name="description"]').value;
-    
-        eventFunc.updateEventToDatabase(id, title, time, date, description)
+        var type = monthCalendar__editEventForm.querySelector('select[name="type"]').value;
+
+        eventFunc.updateEventToDatabase(id, title, time, date, description, type)
             .then(() => {   
                 show(today, month, year);
                 alert('saved');
