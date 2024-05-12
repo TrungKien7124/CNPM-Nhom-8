@@ -10,8 +10,8 @@ class Event {
         this.description = description;
     }
 
-    async addEvent({title, time, date, description}) {
-        const query = `INSERT INTO events (title, date, description, time) VALUES ('${title}', '${date}', '${description}', '${time}')`;
+    async addEvent({title, time, date, description, type}) {
+        const query = `INSERT INTO events (title, date, description, time, type) VALUES ('${title}', '${date}', '${description}', '${time}', '${type}')`;
         return await databaseQuery(query);
     }
 
@@ -25,8 +25,8 @@ class Event {
         return await databaseQuery(query);
     }
 
-    async updateEvent({id, title, time, date, description}) {
-        const query = `UPDATE events SET title = '${title}', date = '${date}', description = '${description}', time = '${time}' WHERE id = '${id}'`;
+    async updateEvent({id, title, time, date, description, type}) {
+        const query = `UPDATE events SET title = '${title}', date = '${date}', description = '${description}', time = '${time}', type = '${type}' WHERE id = '${id}'`;
         return await databaseQuery(query);
     }
 }
