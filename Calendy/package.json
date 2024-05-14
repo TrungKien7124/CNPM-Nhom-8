@@ -13,8 +13,10 @@
   "dependencies": {
     "express": "^4.18.3",
     "express-handlebars": "^7.1.2",
+    "express-session": "^1.18.0",
     "mongoose": "^8.2.2",
     "node-sass": "^9.0.0",
+    "session": "^0.1.0",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
