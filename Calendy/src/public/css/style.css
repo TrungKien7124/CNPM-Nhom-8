@@ -492,3 +492,6 @@ body {
             transform: translateX(-2px); }
         .right .week-calendar .events_container .events:first-child {
           border-left: 0; }
+
+.loginPage button {
+  background-color: #005ff9; }
