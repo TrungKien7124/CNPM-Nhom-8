@@ -5,7 +5,7 @@
   "main": "./src/app.js",
   "scripts": {
     "start": "nodemon --inspect src/index.js",
-    "watch": "node-sass --watch src/resources/scss/style.scss src/public/css/style.css",
+    "watch": "sass --watch src/resources/scss/style.scss src/public/css/style.css",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -15,6 +15,7 @@
     "express-handlebars": "^7.1.2",
     "mongoose": "^8.2.2",
     "node-sass": "^9.0.0",
+    "sass": "^1.77.0",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {

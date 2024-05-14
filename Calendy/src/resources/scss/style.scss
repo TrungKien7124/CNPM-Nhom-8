@@ -20,6 +20,85 @@ body {
 .first-part {
     display: flex;
 }
+#abc {
+    position: relative;
+    top: 375px;
+    
+    
+}
+
+.group-event {
+    
+    position: relative;
+
+    #eventInputContainer {
+        position: absolute;
+        top: 50px;
+    }
+
+    #eventInputContainer {
+        #newEventName:focus {
+            background-color: lightblue;
+        }
+        #confirmEventButton {
+            padding: 5px 10px;
+            font-size: 15px;
+            text-align: center;
+            cursor: pointer;
+            outline: none;
+            color: #fff;
+            background-color: lightblue;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px  lightblue;
+            font-weight: bold;
+          }
+          
+        #confirmEventButton:active {
+            box-shadow: none;
+            transform: translateY(5px);
+          }
+    }
+
+    #addButton {
+        height: 30px;
+        width: 40px;
+        border-radius: 30%;
+    }
+
+    #newCheckboxName {
+        width: 100px;
+    }
+    
+    #checkboxContainer {
+        width: 200px;
+        display: none;
+        position: absolute;
+        top: 100px; 
+        left: 0;
+        background-color: lightblue;
+        border: 1px solid white;
+        padding: 10px;
+    }
+    
+    
+    #checkboxContainer label {
+        display: contents;
+    }
+    #toggleButton {
+        border-radius: 20px;
+        width: 150px;
+        font-weight: bold;
+        #toggle-icon {
+            width: 50px; 
+            height: auto;
+            margin-left: 5px; 
+            
+        }
+    }
+    
+}
+  
 
 .menu-header {
     border: none;
@@ -49,7 +128,7 @@ body {
 }
 
 .beside-menu {
-    display: flex;
+    display: flex; 
 }
 
 .logo-calendy {
@@ -136,12 +215,13 @@ body {
     position: relative;
 }
 
+
 .add-event-form, .edit-event-form {
     position: absolute;
     max-width: 300px;
     max-height: 500px;
     overflow: hidden;
-    border-radius: 20px;
+    border-radius: 30px;
     background-color: $containerBackground;
     box-shadow: 4px 4px 8px #8888888a;
     top: 20px;

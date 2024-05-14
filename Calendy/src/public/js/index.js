@@ -20,6 +20,7 @@ const monthCalendar = document.querySelector('.left .calendar'),
     monthCalendar__editEventForm_removeButton = document.querySelector('.edit-event-form .remove-event-btn'),
     weekCalendar__days_container = document.querySelector('.right .days'),
     weekCalendar__weekEvents_container = document.querySelector('.right .events_container');
+    
 
 const get_event_API = "http://localhost:3000/api/get-events";
 const add_event_API = "http://localhost:3000/api/add-event";
@@ -72,6 +73,7 @@ function init(today, month, year) {
             console.error('Error:', error);
         });
 }
+
 
 monthCalendar__goToPrevMonth_button.addEventListener("click", () => {
     month--;
@@ -243,3 +245,102 @@ function addEventsListener() {
         }
     );
 }
+
+function createCheckboxes() {
+    var checkboxContainer = document.getElementById("checkboxContainer");
+    checkboxContainer.innerHTML = ""; // Clear previous content
+
+    
+    checkboxNames.forEach(function(name, index) {
+        var checkboxDiv = document.createElement("div");
+        
+        var input = document.createElement("input");
+        input.type = "checkbox";
+        input.id = "checkbox" + (index + 1);
+
+        var deleteButton = document.createElement("button");
+        
+        
+        deleteButton.addEventListener("click", function() {
+            checkboxNames.splice(index, 1);
+            createCheckboxes();
+        });
+        deleteButton.style.position = "absolute";
+        
+        deleteButton.style.right = "20px";
+
+        var deleteIcon = document.createElement("img");
+        deleteIcon.src = "https://banner2.cleanpng.com/20191230/weo/transparent-trash-icon-bin-icon-pollution-icon-5e0a20e261c162.5470446815777220824004.jpg";
+        deleteIcon.style.width = "20px"; 
+        deleteIcon.style.height = "20px"; 
+        deleteButton.appendChild(deleteIcon);
+        
+
+        var label = document.createElement("label");
+        label.htmlFor = "checkbox" + (index + 1);
+        label.appendChild(document.createTextNode(name));
+        
+        label.style.fontWeight = "bold";
+        
+
+        checkboxDiv.appendChild(input);
+        checkboxDiv.appendChild(label);
+        checkboxDiv.appendChild(deleteButton);
+        checkboxDiv.appendChild(document.createElement("br"));
+
+        checkboxContainer.appendChild(checkboxDiv);
+
+        checkboxDiv.style.marginBottom = "10px"; 
+    });
+}
+
+var checkboxNames = []; 
+
+document.getElementById("toggleButton").addEventListener("click", function() {
+    var checkboxContainer = document.getElementById("checkboxContainer");
+    if (checkboxContainer.style.display === "none") {
+        createCheckboxes();
+        checkboxContainer.style.display = "block";
+        this.textContent = "My Event";
+    } else {
+        checkboxContainer.style.display = "none";
+        this.textContent = "Show Event";
+    }
+});
+
+
+
+document.getElementById("addButton").addEventListener("click", function() {
+    var eventInputContainer = document.getElementById("eventInputContainer");
+    var check = 0;
+    if(check === 0 && eventInputContainer.style.display === "none") {
+        eventInputContainer.style.display = "block";
+        check = 1;
+    }
+    if(check === 0 && eventInputContainer.style.display === "block") {
+        eventInputContainer.style.display = "none";
+    }
+    
+    
+    
+});
+
+document.getElementById("confirmEventButton").addEventListener("click", function() {
+    var newEventName = document.getElementById("newEventName").value;
+    if (newEventName.trim() !== "") {
+        var x = " " + " " + newEventName;
+        checkboxNames.push(x);
+        createCheckboxes();
+        
+        console.log("Thêm sự kiện mới:", newEventName);
+        document.getElementById("newEventName").value = ""; 
+        var eventInputContainer = document.getElementById("eventInputContainer");
+        eventInputContainer.style.display = "none"; 
+    }
+});
+
+
+
+
+
+
