@@ -15,4 +15,7 @@ router.post('/login', loginController.login);
 
 router.post('/logout', loginController.logout);
 
+const registerController = require('../app/controllers/registerController.js');
+router.post('/register', registerController.registerUser);
+router.post('/reset-password', registerController.resetPassword);
 module.exports = router;
