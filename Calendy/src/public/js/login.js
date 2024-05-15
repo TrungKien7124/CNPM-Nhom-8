@@ -57,71 +57,47 @@ const usernameInput = document.getElementById('usernameInput');
 const passwordInput = document.getElementById('passwordInput');
 const reenterPasswordInput = document.getElementById('reenterPasswordInput');
 const securityPasswordInput = document.getElementById('securityPasswordInput');
+const registerErrorContainer = document.querySelector('.register-error');
 
 registerButton.addEventListener('click', async (event) => {
   event.preventDefault();
 
-  const username = usernameInput.value;
+  const username = usernameInput.value.trim();
   const password = passwordInput.value;
   const reenterPassword = reenterPasswordInput.value;
   const securityPassword = securityPasswordInput.value;
 
-  if (username.length < 8) {
-    alert('Username phải có ít nhất 8 ký tự');
-    return;
-  }
-
-  if (password.length < 6) {
-    alert('Password phải có ít nhất 6 ký tự');
-    return;
-  }
-
+  // Kiểm tra dữ liệu ở phía client
   if (password !== reenterPassword) {
-    alert('Xác nhận password không khớp');
+    alert('Passwords do not match');
     return;
   }
 
-  if (securityPassword.length < 6) {
-    alert('Security Password phải có ít nhất 6 ký tự');
-    return;
-  }
-
-  const user = { username, password, securityPassword };
-
-  const isUsernameExist = await fetch('/api/is-username-exist', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ username }),
-  })
-    .then((response) => response.json())
-    .then((data) => data.isUsernameExist)
-    .catch((error) => {
-      console.error('Error:', error);
-      return false;
+  try {
+    const response = await fetch('/api/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password, securityPassword }),
     });
 
-  if (isUsernameExist) {
-    alert('Username đã tồn tại');
-    return;
-  }
+    const data = await response.json();
 
-  fetch('/api/register', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(user),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data.message);
-      alert('Đăng ký thành công');
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+    if (response.ok) {
+      alert(data.message);
+      // Xóa dữ liệu trong các trường input
+      usernameInput.value = '';
+      passwordInput.value = '';
+      reenterPasswordInput.value = '';
+      securityPasswordInput.value = '';
+    } else {
+      alert(data.error);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('An error occurred. Please try again later.');
+  }
 });
 
 
