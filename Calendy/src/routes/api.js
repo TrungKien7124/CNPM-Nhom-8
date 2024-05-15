@@ -15,4 +15,14 @@ router.post('/login', loginController.login);
 
 router.post('/logout', loginController.logout);
 
+const registerController = require('../app/controllers/registerController.js');
+router.get('/register', registerController.renderRegisterPage);
+router.post('/register', registerController.registerUser);
+
+router.post('/is-username-exist', async (req, res) => {
+  const { username } = req.body;
+  const isUsernameExist = await registerController.isUsernameExist(username);
+  res.json({ isUsernameExist });
+});
+router.post('/reset-password', registerController.resetPassword);
 module.exports = router;

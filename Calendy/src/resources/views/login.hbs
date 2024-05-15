@@ -1,6 +1,83 @@
 <div class="loginPage">
 
-    {{!-- code trong div nay !! --}}
+    <div class="wrapper">
+        <div class="form-box-login">
+            <h2>Log in</h2>
+            <form id="loginForm">
+        <div class="input-box">
+          <input type="text" id="usernameInput" name="username" required>
+          <label>Username</label>
+        </div>
+        <div class="input-box">
+          <input type="password" id="passwordInput" name="password" required>
+          <label>Password</label>
+        </div>
+        <div class="forget-password">
+            <a href  = "#" class = reset-password>Forgot Password ?</a>
+        </div>
+        <button type = "submit" class = "login-submit-btn">Login
+        </button>
+        <div class="register">
+            <p> Don't have an account ?
+            <a href="#" class = register-form>Register</a></p>
+        </div>
+              </form>
+        </div>
+
+        <div class="form-box-register">
+      <h2>Register</h2>
+      <form id="registerForm">
+        <div class="input-box">
+          <input type="text" id="usernameInput" name="username" required>
+          <label>Username</label>
+        </div>
+        <div class="input-box">
+          <input type="password" id="passwordInput" name="password" required>
+          <label>Password</label>
+        </div>
+        <div class="input-box">
+          <input type="password" id="reenterPasswordInput" name="reenterPassword" required>
+          <label>Re-enter Password</label>
+        </div>
+        <div class="input-box">
+          <input type="password" id="securityPasswordInput" name="securityPassword" required>
+          <label>Security Password</label>
+        </div>
+        <button type="submit" class="register-submit-btn">Register</button>
+      </form>
+        <div class="register">
+            <p> Have an account ?
+            <a href = "#" class = login-form>Log in</a></p>
+        </div>
+    </div>
+
+    <div class="form-box-reset-password">
+      <h2>Reset Password</h2>
+      <form id="resetForm">
+        <div class="input-box">
+          <input type="text" id="username-reset-Input" name="username" required>
+          <label>Username</label>
+        </div>
+        <div class="input-box">
+          <input type="password" id="securityPassword-reset-Input" name="securityPassword" required>
+          <label>Security Password</label>
+        </div>
+        <div class="input-box">
+          <input type="password" id="password-reset-Input" name="password" required>
+          <label>Password</label>
+        </div>
+        <div class="input-box">
+          <input type="password" id="reenterPassword-reset-Input" name="reenterPassword" required>
+          <label>Re-enter Password</label>
+        </div>
+        <button type="submit" class="reset-submit-btn">Change Password</button>
+      </form>
+        <div class="register">
+            <p> Have an account ?
+            <a href = "#" class = login-form>Log in</a></p>
+        </div>
+    </div>
+        </div>
     
     <button class="loginButton">Login Page</button>
 
