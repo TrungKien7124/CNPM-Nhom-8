@@ -9,24 +9,24 @@ let eventFunc = {
         return /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(time);
     },
 
-    checkDateInput: function (date) {
+    checkDateInput: function (dateString) {
 
-    let regex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
-    if (!regex.test(dateString)) return false;
+        let regex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
+        if (!regex.test(dateString)) return false;
 
-    let [, day, month, year] = dateString.match(regex);
+        let [, day, month, year] = dateString.match(regex);
 
-    day = parseInt(day, 10);
-    month = parseInt(month, 10) - 1;
-    year = parseInt(year, 10);
+        day = parseInt(day, 10);
+        month = parseInt(month, 10) - 1;
+        year = parseInt(year, 10);
 
-    let date = new Date(year, month, day);
+        let date = new Date(year, month, day);
 
-    return (
-        date.getDate() === day &&
-        date.getMonth() === month &&
-        date.getFullYear() === year
-    );
+        return (
+            date.getDate() === day &&
+            date.getMonth() === month &&
+            date.getFullYear() === year
+        );
     },
 
     showEvents: function (eventsList, event_date) {
@@ -132,7 +132,7 @@ let eventFunc = {
                     console.error('Error:', error);
                     reject(error);
                 });
-        });       
+        });
     },
 
     updateEventToDatabase: function (id, title, time, date, description, type) {
@@ -182,7 +182,7 @@ let eventFunc = {
         });
     },
 
-    addEventsListener: function() {
+    addEventsListener: function () {
         const monthCalendar__editEventForm = document.querySelector('.edit-event-form');
         document.querySelectorAll('.right .events .event').forEach(
             (e) => {
