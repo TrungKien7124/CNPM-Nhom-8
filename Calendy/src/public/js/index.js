@@ -93,7 +93,14 @@ function init() {
         var date = document.querySelector('input[name="date"]').value;
         var description = document.querySelector('input[name="description"]').value;
         var type = document.querySelector('select[name="type"]').value;
-        alert(type);
+        
+        if (!eventFunc.checkDateInput(date)) {
+            alert('Invalid Date!');
+            return;
+        } else if (!eventFunc.checkTimeInput(time)) {
+            alert('Invalid Time!');
+            return;
+        }
         eventFunc.addEventToDatabase(title, time, date, description, type)
             .then(() => {
                 show(today, month, year);
