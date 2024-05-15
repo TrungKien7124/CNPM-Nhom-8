@@ -7,20 +7,16 @@ $textColor3: #8a94a6;
 $boderColor: #dadce0;
 
 body {
-    background-image: linear-gradient(to bottom right, #EAE7F1, #E1F3FE);
 }
-
 .header {
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    height: 64px;
+	background-color: #fff;
+	display: flex;
+	align-items: center;
+	height: 64px;
 }
-
 .first-part {
-    display: flex;
+	display: flex;
 }
-
 .menu-header {
     border: none;
     width: 48px;
@@ -38,21 +34,18 @@ body {
 }
 
 .menu-header-img {
-    max-width: 20px;
+	max-width: 20px;
 }
-
 .beside-menu {
-    display: flex;
+	display: flex;
 }
-
 .logo-calendy {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	width: 48px;
+	height: 48px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-
 .beside-logo {
     margin-left: 30px;
     margin-right: 5px;
@@ -61,12 +54,10 @@ body {
     justify-content: center;
     align-items: center;
 }
-
 .detail-items {
     display: flex;
     display: flex;
 }
-
 .current-state {
     margin-left: 100px;
     margin-right: 5px;
@@ -205,6 +196,50 @@ body {
         background-color: #fff;
     }
 }
+/* Container cho các nút */
+.header-buttons {
+	display: flex;
+	margin-left: auto;
+	justify-content: flex-end;
+	align-items: center;
+  }
+  
+  /* Kiểu cho nút sign up */
+  .register-button {
+	background: transparent;
+	width: 97px;
+	height: 50px;
+	border-radius: 5px;
+	border-color: #dadce0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 20px;
+	font-weight: 600;
+	cursor: pointer;
+	margin-right: 10px; /* Khoảng cách với nút login */
+	&:hover {
+	  background-color: #fff;
+	}
+  }
+  
+  /* Kiểu cho nút login */
+  .login-button {
+	background: transparent;
+	width: 80px;
+	height: 50px;
+	border-radius: 5px;
+	border-color: #dadce0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 20px;
+	font-weight: 600;
+	cursor: pointer;
+	&:hover {
+	  background-color: #fff;
+	}
+  }
 
 
 // Add, edit event form
@@ -785,7 +820,6 @@ body {
         color: #2d384d;
         text-align: center;
     }
-
     .input-box {
         position: relative;
         width: 100%;
@@ -877,7 +911,6 @@ body {
         color: #fff;
         font-weight: 500;
     }
-
     .register {
         font-size: 0.9rem;
         color: #373c4f;
@@ -895,6 +928,7 @@ body {
     .register p a:hover {
         text-decoration: underline;
     }
+
 
     button {
         background-color: #005ff9;
@@ -916,4 +950,5 @@ body {
     .wrapper.reset .form-box-reset-password {
         display: block;
     }
+
 }
