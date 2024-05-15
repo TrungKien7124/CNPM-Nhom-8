@@ -1,20 +1,21 @@
-// registerController.js
 const bcrypt = require('bcrypt');
 const { databaseQuery } = require('../../config/database.js');
+
 const registerController = {
-  renderRegisterPage(req, res) {
-    res.render('login');
-  },
-  
   async registerUser(req, res) {
     const { username, password, securityPassword } = req.body;
 
-    if (username.length < 8) {
+    // Validate input data
+    if (!username || username.trim().length < 8) {
       return res.status(400).json({ error: 'Username must be at least 8 characters long' });
     }
 
-    if (password.length < 6 || securityPassword.length < 6) {
-      return res.status(400).json({ error: 'Password and Security Password must be at least 6 characters long' });
+    if (!password || password.length < 6) {
+      return res.status(400).json({ error: 'Password must be at least 6 characters long' });
+    }
+
+    if (!securityPassword || securityPassword.length < 6) {
+      return res.status(400).json({ error: 'Security Password must be at least 6 characters long' });
     }
 
     try {
@@ -22,26 +23,22 @@ const registerController = {
       const hashedSecurityPassword = await bcrypt.hash(securityPassword, 10);
 
       const checkUserQuery = `SELECT * FROM users WHERE username = '${username}'`;
-      const existingUser = await databaseQuery(checkUserQuery);
+      const existingUser = await databaseQuery(checkUserQuery, [username]);
 
       if (existingUser.length > 0) {
         return res.status(400).json({ error: 'Username already exists' });
       }
 
       const insertUserQuery = `INSERT INTO users (username, password, security_password) VALUES ('${username}', '${hashedPassword}', '${hashedSecurityPassword}')`;
-      await databaseQuery(insertUserQuery);
+      await databaseQuery(insertUserQuery, [username, hashedPassword, hashedSecurityPassword]);
 
-      return res.status(200).json({ message: 'User registered successfully' });
+      return res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
       console.error('Error registering user:', error);
       return res.status(500).json({ error: 'Internal server error' });
     }
   },
-  async isUsernameExist(username) {
-    const query = `SELECT COUNT(*) FROM users WHERE username = '${username}'`;
-    const result = await databaseQuery(query, [username]);
-    return result[0]['COUNT(*)'] > 0;
-  },
+
 
 
   async resetPassword(req, res) {
