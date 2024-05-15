@@ -4,6 +4,10 @@ let loginController = {
     },
 
     login(req, res) {
+
+        //kiem tra mat khau, tai khoan 
+
+        //set user id cho session
         req.session.user_id = 1;
         return res.status(200).json({user_id: req.session.user_id, message: 'Login successfully!'});
     },

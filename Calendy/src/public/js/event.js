@@ -5,6 +5,30 @@ const update_event_API = "http://localhost:3000/api/update-event";
 
 
 let eventFunc = {
+    checkTimeInput: function (time) {
+        return /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(time);
+    },
+
+    checkDateInput: function (date) {
+
+    let regex = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/;
+    if (!regex.test(dateString)) return false;
+
+    let [, day, month, year] = dateString.match(regex);
+
+    day = parseInt(day, 10);
+    month = parseInt(month, 10) - 1;
+    year = parseInt(year, 10);
+
+    let date = new Date(year, month, day);
+
+    return (
+        date.getDate() === day &&
+        date.getMonth() === month &&
+        date.getFullYear() === year
+    );
+    },
+
     showEvents: function (eventsList, event_date) {
         let res = [];
         event_date = event_date.replace(/-/g, '/');
