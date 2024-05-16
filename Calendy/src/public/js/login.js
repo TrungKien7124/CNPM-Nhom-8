@@ -1,28 +1,8 @@
-let loginButton = document.querySelector(".loginButton");
 
 const loginAPI = 'http://localhost:3000/api/login';
 const logoutAPI = 'http://localhost:3000/api/logout';
 
-loginButton.addEventListener("click", () => {
-    fetch(loginAPI, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then((response) => {
 
-        // Thong bao ra man hinh
-        alert('Login successfully!');
-
-        // Chuyen huong sang home page
-        window.location.href = '/';
-        return response.json();
-    }) 
-    .catch((error) => {
-        console.error('Error:', error);
-    })
-});
 
 const wrapper = document.querySelector('.loginPage .wrapper');
 const loginLink = document.querySelector('.loginPage .wrapper .login-form');
@@ -134,5 +114,54 @@ resetSubmitBtn.addEventListener('click', async (event) => {
     }
   } catch (error) {
     console.error('Error:', error);
+  }
+});
+
+
+
+
+
+const loginForm = document.getElementById('loginForm');
+
+
+
+
+loginForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const usernameInput = document.getElementById('login-usernameInput');
+  const passwordInput = document.getElementById('login-passwordInput');
+
+  const username = usernameInput.value;
+  const password = passwordInput.value;
+
+  try {
+    const response = await fetch(loginAPI, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    });
+
+    console.log('Response status:', response.status);
+
+    if (response.ok) {
+      const contentType = response.headers.get('Content-Type');
+
+      if (contentType && contentType.includes('application/json')) {
+        const data = await response.json();
+        alert(data.message);
+        window.location.href = '/';
+      } else {
+        alert('Unexpected response from server');
+      }
+    } else {
+      const data = await response.json();
+      alert(data.error);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('An error occurred while logging in');
   }
 });

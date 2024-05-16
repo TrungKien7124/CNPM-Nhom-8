@@ -72,23 +72,22 @@ let eventFunc = {
         return events;
     },
 
-    getEventsList: function () {
+    getEventsList(userId) {
         return new Promise((resolve, reject) => {
-            fetch(get_event_API)
-                .then(response => response.json())
-                .then((response) => {
-                    console.log(response);
-                    document.querySelectorAll('.right .events').forEach((e) => {
-                        e.innerHTML = this.showEvents(response, e.id);
-                    })
-                    resolve();
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                    reject(error);
-                });
+          this.getEventsByUserId(userId)
+            .then((response) => {
+              console.log(response);
+              document.querySelectorAll('.right .events').forEach((e) => {
+                e.innerHTML = this.showEvents(response, e.id);
+              })
+              resolve();
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              reject(error);
+            });
         });
-    },
+      },
 
     dateComparing: function (a, b) {
         let tmp1 = a.split('/').map(e => parseInt(e));
@@ -197,7 +196,22 @@ let eventFunc = {
                 })
             }
         );
-    }
+    },
+
+getEventsByUserId(userId) {
+    return new Promise((resolve, reject) => {
+      fetch(`${get_event_API}?userId='${userId}'`)
+        .then(response => response.json())
+        .then((response) => {
+          console.log(response);
+          resolve(response);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          reject(error);
+        });
+    });
+  }
 };
 
 export default eventFunc;
