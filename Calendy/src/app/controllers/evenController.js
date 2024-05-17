@@ -5,7 +5,7 @@ let eventManagement = new Event();
 
 let APIController = {
     getEvents(req, res) {
-        eventManagement.getEvents()
+        eventManagement.getEvents(req.session.user_id)
             .then((events) => {
                 return res.status(200).json(events);
             })
@@ -15,7 +15,7 @@ let APIController = {
     },
 
     addEvent(req, res) {
-        eventManagement.addEvent(req.body)
+        eventManagement.addEvent(req.session.user_id, req.body)
             .then(() => {
                 return res.status(200).json({message: 'Add event successfully!'});
             })

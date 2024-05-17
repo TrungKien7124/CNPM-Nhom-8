@@ -48,26 +48,26 @@ const registerController = {
     if (password !== reenterPassword) {
       return res.status(400).json({ error: 'New passwords do not match' });
     }
-  
+
     try {
       const checkUserQuery = `SELECT * FROM users WHERE username = '${username}'`;
       const user = await databaseQuery(checkUserQuery, [username]);
-  
+
       if (user.length === 0) {
         return res.status(404).json({ error: 'Invalid username' });
       }
-  
+
       const isSecurityPasswordValid = await bcrypt.compare(securityPassword, user[0].security_password);
-  
+
       if (!isSecurityPasswordValid) {
         return res.status(401).json({ error: 'Invalid security password' });
       }
-  
+
       const hashedNewPassword = await bcrypt.hash(password, 10);
-  
+
       const updatePasswordQuery = `UPDATE users SET password = '${hashedNewPassword}' WHERE username = '${username}'`;
       await databaseQuery(updatePasswordQuery, [hashedNewPassword, username]);
-  
+
       return res.status(200).json({ message: 'Password reset successfully' });
     } catch (error) {
       console.error('Error resetting password:', error);

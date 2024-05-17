@@ -26,13 +26,18 @@ body {
       padding-left: 20px;
       font-weight: 500; }
   .header .right {
-    padding-right: 50px; }
+    padding-right: 50px;
+    display: flex; }
     .header .right .button {
-      background-color: #005ff9;
-      font-size: 2rem;
-      color: white;
+      background-color: #fff;
+      font-size: 1rem;
+      color: #323b4b;
       padding: 0px 20px;
-      border-radius: 20px; }
+      margin: 0px 5px;
+      border-radius: 10px;
+      border: 2px solid #dadce0;
+      cursor: pointer;
+      font-weight: 500; }
 
 .container-fluid {
   position: relative; }

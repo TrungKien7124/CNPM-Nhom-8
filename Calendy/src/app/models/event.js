@@ -10,13 +10,13 @@ class Event {
         this.description = description;
     }
 
-    async addEvent({title, time, date, description, type}) {
-        const query = `INSERT INTO events (title, date, description, time, type) VALUES ('${title}', '${date}', '${description}', '${time}', '${type}')`;
+    async addEvent(user_id, {title, time, date, description, type}) {
+        const query = `INSERT INTO events (user_id, title, date, description, time, type) VALUES ('${user_id}', '${title}', '${date}', '${description}', '${time}', '${type}')`;
         return await databaseQuery(query);
     }
 
-    async getEvents() {
-        const query = `SELECT * FROM events`;
+    async getEvents(user_id) {
+        const query = `SELECT * FROM events WHERE user_id = ${user_id}`;
         return await databaseQuery(query);
     }
 

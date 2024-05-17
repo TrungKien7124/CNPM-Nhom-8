@@ -45,12 +45,17 @@ body {
 
     .right {
         padding-right: 50px;
+        display: flex;
         .button {
-            background-color: $textColor2;
-            font-size: 2rem;
-            color: white;
+            background-color: $backgroundColor2;
+            font-size: 1rem;
+            color: $textColor1;
             padding: 0px 20px;
-            border-radius: 20px;
+            margin: 0px 5px;
+            border-radius: 10px;
+            border: 2px solid $boderColor;
+            cursor: pointer;
+            font-weight: 500;
         }
     }
 }
