@@ -72,23 +72,22 @@ let eventFunc = {
         return events;
     },
 
-    getEventsList: function () {
+    getEventsList(userId) {
         return new Promise((resolve, reject) => {
-            fetch(get_event_API)
-                .then(response => response.json())
-                .then((response) => {
-                    console.log(response);
-                    document.querySelectorAll('.right .events').forEach((e) => {
-                        e.innerHTML = this.showEvents(response, e.id);
-                    })
-                    resolve();
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                    reject(error);
-                });
+          this.getEventsByUserId(userId)
+            .then((response) => {
+              console.log(response);
+              document.querySelectorAll('.right .events').forEach((e) => {
+                e.innerHTML = this.showEvents(response, e.id);
+              })
+              resolve();
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+              reject(error);
+            });
         });
-    },
+      },
 
     dateComparing: function (a, b) {
         let tmp1 = a.split('/').map(e => parseInt(e));
@@ -110,7 +109,7 @@ let eventFunc = {
         return tmp1[0] - tmp2[0];
     },
 
-    addEventToDatabase: function (title, time, date, description, type) {
+    addEventToDatabase(userId, title, time, date, description, type) {
         return new Promise((resolve, reject) => {
             fetch(add_event_API, {
                 method: 'POST',
@@ -118,6 +117,7 @@ let eventFunc = {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
+                    userId: userId,
                     title: title,
                     time: time,
                     date: date,
@@ -197,7 +197,22 @@ let eventFunc = {
                 })
             }
         );
-    }
+    },
+
+getEventsByUserId(userId) {
+    return new Promise((resolve, reject) => {
+      fetch(`${get_event_API}?userId='${userId}'`)
+        .then(response => response.json())
+        .then((response) => {
+          console.log(response);
+          resolve(response);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          reject(error);
+        });
+    });
+  }
 };
 
 export default eventFunc;
