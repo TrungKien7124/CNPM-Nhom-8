@@ -1,6 +1,6 @@
 let loginController = {
     renderLoginPage(req, res) {
-        res.render('login');
+        res.render('login', {header1: true});
     },
 
     login(req, res) {

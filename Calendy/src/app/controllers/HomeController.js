@@ -1,6 +1,6 @@
 let homeController = {
     getHomePage(req, res) {
-        res.render('home');
+        res.render('home', {header2: true});
     },
 }
 
