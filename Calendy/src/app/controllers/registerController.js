@@ -5,7 +5,6 @@ const registerController = {
   async registerUser(req, res) {
     const { username, password, securityPassword } = req.body;
 
-    // Validate input data
     if (!username || username.trim().length < 8) {
       return res.status(400).json({ error: 'Username must be at least 8 characters long' });
     }
