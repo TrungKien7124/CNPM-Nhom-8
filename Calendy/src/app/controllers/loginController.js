@@ -1,3 +1,4 @@
+
 const { databaseQuery } = require('../../config/database.js');
 const bcrypt = require('bcrypt');
 
@@ -25,7 +26,7 @@ async function checkCredentials(username, password) {
 
 let loginController = {
   renderLoginPage(req, res) {
-    res.render('login');
+    res.render('login', {header1: true});
   },
 
   login(req, res) {

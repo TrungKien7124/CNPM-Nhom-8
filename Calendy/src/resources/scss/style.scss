@@ -8,229 +8,52 @@ $boderColor: #dadce0;
 
 body {
     background-color: $backgroundColor2;
+    position: relative;
 }
+
 .header {
-	background-color: #fff;
-	display: flex;
-	align-items: center;
-	height: 64px;
-    padding: 8px;
-    border-bottom: 1px solid #dadce0;
-
-    .first-part {
-        display: flex;
-        padding-right: 30px;
-        width: 238px;
-        height: 48px;
-    
-        .menu-header {
-            border: none;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: background-color 0.3s;
-            background-color: #fff;
-            padding: 12px;
-            margin: 0 4px;
-        
-            &:hover {
-                background-color: #f0f0f0;
-            }
-        
-            .menu-header-img {
-                max-width: 20px;
-            }
-        }
-    
-        .beside-menu {
-            display: flex;
-            align-items: center;
-            width: 137.88px;
-            height: 44px;
-            .logo-calendy {
-                width: 44px;
-                height: 40px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            .beside-logo {
-                font-size: 22px;
-                font-weight: 400;
-                width: 93.88px;
-                height: 24px;
-                margin: 0 0 0 3px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-        }
-    
-    }
-    
-}
-
-.detail-items {
+    height: 100px;
+    width: 100vw;
     display: flex;
-    height: 48px;
     align-items: center;
-    .state{
-        height: 48px;
-        width: 103.58px;
-        justify-content: center;
-        .current-state {
-            width: 80px;
-            height: 80%;
-            margin-top: 5px;
-            padding: 6px;
-            border: 1px solid;
-            border-radius: 5px;
-            border-color: #dadce0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-        
-            &:hover {
-                background-color: #f0f0f0;
-            }
+    justify-content: space-between;
+    border-bottom: 2px solid $boderColor;
+
+    .left {
+        display: flex;
+        height: 100px;
+        align-items: center;
+        padding-left: 50px;
+
+        .logo {
+            width: 90px;
+            height: 90px;
+        }
+
+        .name {
+            font-weight: 500;
+            color: $textColor1;
+            border-right: 2px solid $boderColor;
+            padding-right: 20px;
+        }
+
+        .date {
+            padding-left: 20px;
+            font-weight: 500;
         }
     }
 
-    .prev-state {
-        margin-right: 5px;
-        color: #5f6368;
-        width: 32px;
-        height: 32px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 8px;
-        border-radius: 50%;
-        position: relative;
-        transition: background-color 0.3s;
-    
-        &:hover {
-            background-color: #f0f0f0;
-        }
-    
-        &::before {
-            content: "";
-            width: 10px;
-            height: 10px;
-            border-top: 2px solid #5f6368;
-            border-left: 2px solid #5f6368;
-            position: absolute;
-            top: 50%;
-            left: 55%;
-            transform: translate(-50%, -50%) rotate(-45deg);
+    .right {
+        padding-right: 50px;
+        .button {
+            background-color: $textColor2;
+            font-size: 2rem;
+            color: white;
+            padding: 0px 20px;
+            border-radius: 20px;
         }
     }
-    
-    .next-state {
-        margin-right: 5px;
-        color: #5f6368;
-        width: 32px;
-        height: 32px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 8px;
-        border-radius: 50%;
-        position: relative;
-        transition: background-color 0.3s;
-    
-        &:hover {
-            background-color: #f0f0f0;
-        }
-    
-        &::before {
-            content: "";
-            width: 10px;
-            height: 10px;
-            border-top: 2px solid #5f6368;
-            border-left: 2px solid #5f6368;
-            position: absolute;
-            top: 50%;
-            left: 45%;
-            transform: translate(-50%, -50%) rotate(135deg);
-        }
-    }
-
-    .currentDate{
-        padding: 8px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 22px;
-        font-weight: 400;
-    }
-
 }
-
-
-
-
-/* Container cho các nút */
-.header-buttons {
-    height: 48px;
-	display: flex;
-	margin-left: auto;
-	justify-content: flex-end;
-	align-items: center;
-    gap: 10px;
-
-    /* Kiểu cho nút sign up */
-    .register-button {
-        background: transparent;
-        width: 80px;
-        height: 38.4px;
-        border: 1px solid;
-        border-radius: 5px;
-        border-color: #dadce0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-
-        &:hover {
-            background-color: #fff;
-        }
-
-        .register{
-            height: 100%;
-            width: 100%;
-        }
-    }
-
-    /* Kiểu cho nút login */
-    .login-button {
-        background: transparent;
-        width: 80px;
-        height: 38.4px;
-        border: 1px solid;
-        border-radius: 5px;
-        border-color: #dadce0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-
-        &:hover {
-            background-color: #fff;
-        }
-    }
-  }
- 
 
 
 // Add, edit event form
@@ -418,7 +241,7 @@ body {
 }
 
 
-.left {
+.container-fluid .left {
     margin-top: 20px;
     min-height: 100vh;
     position: relative;
@@ -607,7 +430,7 @@ body {
 // CSS Right Div
 
 
-.right {
+.container-fluid .right {
     background-color: $backgroundColor2;
     min-height: 100vh;
     margin-top: 20px;
@@ -811,6 +634,7 @@ body {
         color: #2d384d;
         text-align: center;
     }
+
     .input-box {
         position: relative;
         width: 100%;
@@ -902,6 +726,7 @@ body {
         color: #fff;
         font-weight: 500;
     }
+
     .register {
         font-size: 0.9rem;
         color: #373c4f;

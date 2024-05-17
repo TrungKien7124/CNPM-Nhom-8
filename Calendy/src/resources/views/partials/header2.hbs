@@ -1,0 +1,16 @@
+<div class="header">
+    <div class="left">
+        <img class="logo" src="/img/logo.png">
+        <h1 class="name">Calendy</h1>
+        <h3 class="date"></h3>
+    </div>
+    <div class="right">
+        <div class="button">logout</div>
+    </div>
+</div>
+
+<script>
+    let dateContainer = document.querySelector('.header .left .date');
+    let date = new Date();
+    dateContainer.innerText = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+</script>
