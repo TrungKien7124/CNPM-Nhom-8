@@ -1,8 +1,7 @@
 let homeController = {
-    getHomePage(req, res) {
-        const userId = req.session.user_id;
-        res.render('home', { userId });
-      },
+  getHomePage(req, res) {
+      res.render('home');
+  },
 }
 
 module.exports = homeController;

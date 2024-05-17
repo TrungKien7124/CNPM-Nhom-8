@@ -109,7 +109,7 @@ let eventFunc = {
         return tmp1[0] - tmp2[0];
     },
 
-    addEventToDatabase: function (title, time, date, description, type) {
+    addEventToDatabase(userId, title, time, date, description, type) {
         return new Promise((resolve, reject) => {
             fetch(add_event_API, {
                 method: 'POST',
@@ -117,6 +117,7 @@ let eventFunc = {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
+                    userId: userId,
                     title: title,
                     time: time,
                     date: date,

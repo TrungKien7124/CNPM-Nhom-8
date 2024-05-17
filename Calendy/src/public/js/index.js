@@ -155,14 +155,14 @@ function show(today, month, year) {
     monthCalendar__days_container.innerHTML = calendarFunc.getMonthDays(today, month, year);
     weekCalendar__days_container.innerHTML = calendarFunc.getWeekDays(today, month, year);
     weekCalendar__weekEvents_container.innerHTML = eventFunc.setEventsID(month, year);
-    eventFunc.getEventsList(req.session.user_id) // Truyền user_id vào
-  .then(() => {
-    calendarFunc.addDaysListener(month, year, show);
-    eventFunc.addEventsListener();
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
-  }
-  
-  init();
+    eventFunc.getEventsList()
+        .then(() => {
+            calendarFunc.addDaysListener(month, year, show);
+            eventFunc.addEventsListener();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}
+
+init();

@@ -5,16 +5,14 @@ let eventManagement = new Event();
 
 let APIController = {
     getEvents(req, res) {
-        const userId = req.session.user_id;
-    
-        eventManagement.getEventsByUserId(userId)
-          .then((events) => {
-            return res.status(200).json(events);
-          })
-          .catch((err) => {
-            return res.status(500).json({ error: err.message });
-          });
-      },
+        eventManagement.getEvents()
+            .then((events) => {
+                return res.status(200).json(events);
+            })
+            .catch((err) => {
+                return res.status(500).json({error: err.message});
+            });
+    },
 
     addEvent(req, res) {
         eventManagement.addEvent(req.body)
