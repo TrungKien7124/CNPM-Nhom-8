@@ -87,7 +87,7 @@ let eventFunc = {
                     reject(error);
                 });
         });
-    },
+      },
 
     dateComparing: function (a, b) {
         let tmp1 = a.split('/').map(e => parseInt(e));

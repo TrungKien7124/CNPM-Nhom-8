@@ -26,7 +26,7 @@ async function checkCredentials(username, password) {
 
 let loginController = {
   renderLoginPage(req, res) {
-    res.render('login', {header3: true});
+    res.render('login', {header1: true});
   },
 
   login(req, res) {
