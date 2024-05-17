@@ -13,7 +13,7 @@
             const logoCalendy = document.getElementById('logo-calendy');
             logoCalendy.src = `https://ssl.gstatic.com/calendar/images/dynamiclogo_2020q4/calendar_${day}_2x.png`;
             </script>
-            <h4 class="beside-logo">Calendar</h4>
+            <span class="beside-logo">Calendy</span>
         </div>
         
     </div>
@@ -23,7 +23,7 @@
             <div class="current-state">
                 <br>
                 <a onclick="location.reload()">
-                <b>Today</b>
+                Today
                 </a>
             </div>
             </div>
@@ -34,18 +34,17 @@
             </div>
          
     
-            <h4 class="currentDate">Month Day Year</h4>
+            <div class="currentDate">Month Day Year</div>
         </div>
         <div class="avt"></div>
         <div class="header-buttons">
             <div class="register-button">
-            <button class="register-button">Register</button>
+                <button class="register-button" id="register">Register</button>
+            </div>
+            <div class="login-button">
+                <button class="login-button">Log in</button>
+            </div>
         </div>
-        <div class="login-button">
-            <button class="login-button">Log in</button>
-        </div>
-        
-    </div>
     </div>
 </header>
 <script>
