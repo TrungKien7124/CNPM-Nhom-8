@@ -420,8 +420,7 @@ body {
           align-items: center;
           cursor: pointer;
           margin-top: 10px;
-          border-bottom: 2px solid #dadce0;
-          border-left: 2px solid #dadce0;
+          border: 2px solid #dadce0;
           overflow-x: hidden;
           box-shadow: 4px 4px 8px #8888888a; }
           .container-fluid .right .week-calendar .events_container .events .event .type {

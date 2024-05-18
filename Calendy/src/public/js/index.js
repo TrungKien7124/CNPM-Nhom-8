@@ -74,7 +74,11 @@ function init() {
 
     // cac button cho form them va sua su kien
     monthCalendar__addEvent_button.addEventListener("click", () => {
-        monthCalendar__addEventForm.classList.add('active');
+        if (logined) {
+            monthCalendar__addEventForm.classList.add('active');      
+        } else {
+            alert('Please login to add event!');
+        }
     })
     
     monthCalendar__addEventForm_closeButton.addEventListener("click", () => {
