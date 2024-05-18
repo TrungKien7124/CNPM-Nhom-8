@@ -71,6 +71,7 @@ registerButton.addEventListener('click', async (event) => {
       passwordInput.value = '';
       reenterPasswordInput.value = '';
       securityPasswordInput.value = '';
+      wrapper.classList.remove('active');
     } else {
       alert(data.error);
     }

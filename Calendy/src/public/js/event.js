@@ -183,9 +183,22 @@ let eventFunc = {
 
     addEventsListener: function () {
         const monthCalendar__editEventForm = document.querySelector('.edit-event-form');
-        document.querySelectorAll('.right .events .event').forEach(
+        const monthCalendar__addEventForm = document.querySelector('.add-event-form');
+        document.querySelectorAll('.right .events').forEach(
             (e) => {
                 e.addEventListener("click", () => {
+                    if (logined) {
+                        monthCalendar__addEventForm.querySelector('.event-date').value = e.id.replace(/-/g, '/');
+                        monthCalendar__addEventForm.classList.add('active');
+                    }else {
+                        alert('Please login to add event!');
+                    }
+                })
+            }
+        );
+        document.querySelectorAll('.right .events .event').forEach(
+            (e) => {
+                e.addEventListener("click", (e2) => {
                     monthCalendar__editEventForm.querySelector('.event-id').value = e.querySelector('.id').textContent;
                     monthCalendar__editEventForm.querySelector('.event-name').value = e.querySelector('.title').textContent;
                     monthCalendar__editEventForm.querySelector('.event-time').value = e.querySelector('.time').textContent;
@@ -193,6 +206,7 @@ let eventFunc = {
                     monthCalendar__editEventForm.querySelector('.event-description').value = e.querySelector('.description').textContent;
                     monthCalendar__editEventForm.querySelector('select').value = e.querySelector('.type').textContent;
                     monthCalendar__editEventForm.classList.add('active');
+                    e2.stopPropagation();
                 })
             }
         );
