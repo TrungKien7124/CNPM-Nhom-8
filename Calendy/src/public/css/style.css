@@ -46,6 +46,59 @@ body {
       display: flex;
       align-items: center;
       justify-content: center; }
+      .header .right .button:hover {
+        background-color: #f0f0f0; }
+    .header .right .profile {
+      border-radius: 50%;
+      border: 0px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      .header .right .profile .profile-button {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 0px solid #dadce0;
+        color: #ffffff;
+        align-items: center;
+        justify-content: center;
+        padding: 0px; }
+        .header .right .profile .profile-button .profile-picture {
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          align-items: center;
+          justify-content: center; }
+      .header .right .profile .menu {
+        list-style: none;
+        padding: 0.2rem 0.5rem;
+        background: #fafbfc;
+        border: 1px #dadce0 solid;
+        box-shadow: 0 0.5rem 1em rgba(0, 0, 0, 0.2);
+        border-radius: 0.5em;
+        color: #323b4b;
+        position: absolute;
+        top: 3.5em;
+        left: 93%;
+        width: 80px;
+        transform: translateX(-50%);
+        opacity: 0;
+        display: none;
+        transition: 0.2s;
+        z-index: 1; }
+        .header .right .profile .menu .selection {
+          display: flex;
+          justify-content: center;
+          margin: 0.1em 0;
+          font-weight: 500;
+          cursor: pointer; }
+          .header .right .profile .menu .selection:hover {
+            background: #f0f0f0; }
+      .header .right .profile .menu-open {
+        display: block;
+        opacity: 1; }
 
 .container-fluid {
   position: relative; }

@@ -42,3 +42,34 @@ logout_button.addEventListener("click", function () {
             reject(error);
         });
 });
+
+const dropdowns = document.querySelectorAll('.header .right .profile');
+dropdowns.forEach(dropdown => {
+    const profile_button = dropdown.querySelector('.profile-button')
+    const menu = dropdown.querySelector('.menu')
+    const options = dropdown.querySelectorAll('.selection')
+    profile_button.addEventListener('click', function () {
+        menu.classList.toggle('menu-open');
+    });
+});
+
+options.forEach(option => {
+    option.addEventListener('click', function () {
+        menu.classList.remove('menu-open');
+        logout_button.addEventListener("click", function () {
+            fetch(logoutAPI, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }})
+                .then(response => response.json())
+                .then(data => {
+                    window.location.href = "/login";
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    reject(error);
+                });
+        });
+    });
+});
